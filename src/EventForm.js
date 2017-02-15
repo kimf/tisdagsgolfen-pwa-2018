@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import update from 'immutability-helper'
 
 class EventForm extends Component {
   createEvent = (e) => {
-    e.preventDefault();
-    console.log(this.props);
-    const { seasonId, createEvent } = this.props;
+    e.preventDefault()
+    const { seasonId, createEvent } = this.props
 
     const course = 'Bro Hof'
     const courseId = 690
@@ -27,7 +26,7 @@ class EventForm extends Component {
   }
 
   render() {
-    return <button onClick={this.createEvent}>SKAPA NY RUNDA</button>
+    return <button onClick={this.createEvent}>SKAPA NY</button>
   }
 }
 
@@ -74,9 +73,9 @@ const EventFormWithMutation = graphql(createEventMutation, {
               const newEvent = mutationResult.data.createEvent
               return update(prev, {
                 events: {
-                    $unshift: [newEvent],
-                },
-              });
+                  $unshift: [newEvent]
+                }
+              })
             }
           }
         })

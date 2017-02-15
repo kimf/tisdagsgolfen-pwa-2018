@@ -1,5 +1,7 @@
 import ApolloClient, { createBatchingNetworkInterface } from 'apollo-client'
 
+import { getCache } from './utils'
+
 const dataIdFromObject = result => result.id
 
 const networkInterface = createBatchingNetworkInterface({
@@ -15,8 +17,14 @@ networkInterface.use([{
       req.options.headers = {}
     }
 
-    req.options.headers.authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0ODYyNDc2NTQsImNsaWVudElkIjoiY2l5cWFoZmI5NHNrMjAxMjA5bWJ4b2FzcSIsInByb2plY3RJZCI6ImNpeXFheDJvMDR0MzcwMTIwOTJudHJkN2UiLCJwZXJtYW5lbnRBdXRoVG9rZW5JZCI6ImNpeXJ0aDl6NjVoZm8wMTMydWVzMXBzcWwifQ.0GnTlwX9vjWx_WCWjGm9bIjck9HwcSGKK2vr74nKnW4`
-    next()
+    getCache('currentUser').then((currentUser) => {
+      if (currentUser === null) {
+        next()
+      } else {
+        req.options.headers.authorization = `Bearer ${currentUser.token}`
+        next()
+      }
+    })
   }
 }])
 /* eslint-enable no-param-reassign */

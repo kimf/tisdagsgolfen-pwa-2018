@@ -11,11 +11,13 @@
     "immutability-helper": "^2.1.1",
     "react": "^15.4.2",
     "react-apollo": "^0.10.1",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-native-web": "^0.0.70",
+    "sw-precache": "^4.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

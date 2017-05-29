@@ -1,10 +1,7 @@
 import React from 'react'
 
 const containerStyle = {
-  backgroundColor: '#fff',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
-  flex: 1
+  backgroundColor: '#fff'
 }
 
 const imageStyle = {

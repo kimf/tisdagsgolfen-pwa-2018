@@ -2,12 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const tabStyle = (padding, isCurrent) => ({
-  flex: 1,
+  display: 'inline-block',
   paddingTop: padding,
   paddingBottom: padding,
   backgroundColor: isCurrent ? '#D9EEFF' : '#eee',
-  flexDirection: 'row',
-  justifyContent: 'center'
 })
 
 const Tab = ({ tab, isCurrent, seasonName, fontSize, padding }) => {

@@ -12,11 +12,9 @@ const Profile = ({ data: { loading, user }, onLogout, goBack }) => {
       <button onClick={goBack}>Avbryt</button>
 
       <div style={{ marginTop: 22 }}>
-        <div style={{ flex: 1 }}>
-          Hej {user.firstName}
-          <hr />
-          <button onClick={() => { onLogout(user.email, goBack) }}>LOGGA UT</button>
-        </div>
+        Hej {user.firstName}
+        <hr />
+        <button onClick={() => { onLogout(user.email, goBack) }}>LOGGA UT</button>
       </div>
     </div>
   )

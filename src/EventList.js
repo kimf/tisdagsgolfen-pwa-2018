@@ -13,7 +13,7 @@ const EventList = ({ data }) => {
   }
 
   return (
-    <ul>
+    <ul className="events">
       {data.events.map(e => <li key={`event_${e.id}`} className={e.status}>{e.course} {e.startsAt}</li>)}
     </ul>
   )

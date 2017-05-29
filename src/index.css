@@ -12,7 +12,10 @@ body {
 ul {
   float: left;
   width: 400px;
+  marign: 0;
+  padding: 0;
   margin-right: 40px;
+  list-style: none;
 }
 
 li {
@@ -46,4 +49,7 @@ button {
 .container {
   margin: 0 auto;
   padding: 40px;
+}
+
+.wrapper {
 }

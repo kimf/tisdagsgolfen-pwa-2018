@@ -7,9 +7,7 @@ const SeasonPicker = ({ seasons, currentSeasonName }) => (
       padding: 5,
       paddingTop: 10,
       paddingBottom: 10,
-      backgroundColor: '#333',
-      flexDirection: 'row',
-      justifyContent: 'space-around'
+      backgroundColor: '#333'
     }}
   >
     { seasons.map((season) => {
@@ -17,7 +15,7 @@ const SeasonPicker = ({ seasons, currentSeasonName }) => (
       return (
         <Link
           to={`/${season.name}`}
-          style={{ flex: 1, padding: 5, color }}
+          style={{ padding: 5, color }}
           key={`SeasonPicker_${season.id}`}
         >
           {season.name}

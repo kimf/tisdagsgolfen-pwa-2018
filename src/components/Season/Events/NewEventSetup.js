@@ -65,7 +65,7 @@ class NewEventSetup extends Component {
     }
 
     return (
-      <div className="container" style={{ alignItems: 'stretch', flexDirection: 'column' }}>
+      <div className="container">
         <div>
           <h3>{course.name}</h3>
           <button onClick={() => changeCourse(null)}>

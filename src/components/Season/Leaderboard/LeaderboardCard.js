@@ -19,9 +19,9 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
     position = data.position
     pointspan = 'p'
     if (data.position < data.previousPosition) {
-      upOrDown = <span style={{ flex: 1, color: 'green' }}>↥{data.previousPosition - data.position}</span>
+      upOrDown = <span style={{ color: 'green' }}>↥{data.previousPosition - data.position}</span>
     } else if (data.position > data.previousPosition) {
-      upOrDown = <span style={{ flex: 1, color: 'red' }}>↧{data.position - data.previousPosition}</span>
+      upOrDown = <span style={{ color: 'red' }}>↧{data.position - data.previousPosition}</span>
     }
   }
 
@@ -40,7 +40,7 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
     <div className="row">
       <div key={data.id} style={currentUserStyle}>
         <div>
-          <span style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</span>
+          <span style={{ fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</span>
           { upOrDown }
         </div>
         <div>

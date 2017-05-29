@@ -67,8 +67,7 @@ Season.propTypes = {
     pathname: string
   }).isRequired,
   push: func.isRequired,
-  goBack: func.isRequired,
-  replace: func.isRequired
+  goBack: func.isRequired
 }
 
 export default withRouter(Season)

@@ -1,11 +1,7 @@
 import React from 'react'
-import { Text, View } from 'react-native'
 
 const containerStyle = {
-  backgroundColor: '#eee',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flex: 1
+  backgroundColor: '#eee'
 }
 
 const textStyle = {
@@ -15,9 +11,9 @@ const textStyle = {
 }
 
 const Loading = ({ text }) =>
-  <View style={containerStyle}>
-    <Text style={textStyle}>{ text }</Text>
-  </View>
+  <div style={containerStyle}>
+    <span style={textStyle}>{ text }</span>
+  </div>
 
 
 Loading.propTypes = {

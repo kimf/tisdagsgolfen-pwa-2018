@@ -7,12 +7,9 @@ const Tabs = ({ currentRoute, seasonName, tabs, bottom }) => {
   return (
     <div
       style={{
+        float: 'left',
+        width: '100%',
         backgroundColor: '#fff',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'stretch',
-        marginHorizontal: bottom ? 0 : 10,
-        marginVertical: bottom ? 0 : 5
       }}
     >
       { tabs.map(tab =>

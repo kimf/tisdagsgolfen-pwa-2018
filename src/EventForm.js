@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import update from 'immutability-helper'
 
 class EventForm extends Component {
   createEvent = (e) => {
@@ -67,17 +66,7 @@ const EventFormWithMutation = graphql(createEventMutation, {
     return {
       createEvent({ seasonId, courseId, course, teamEvent, scoringType, startsAt }) {
         return mutate({
-          variables: { seasonId, courseId, course, teamEvent, scoringType, startsAt },
-          updateQueries: {
-            eventsForSeasonQuery: (prev, { mutationResult }) => {
-              const newEvent = mutationResult.data.createEvent
-              return update(prev, {
-                events: {
-                  $unshift: [newEvent]
-                }
-              })
-            }
-          }
+          variables: { seasonId, courseId, course, teamEvent, scoringType, startsAt }
         })
       }
     }

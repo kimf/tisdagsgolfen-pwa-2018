@@ -1,5 +1,4 @@
 import React from 'react'
-import { View, ListView } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -7,43 +6,42 @@ import EventCard from './EventCard'
 import EmptyState from '../../Shared/EmptyState'
 import Loading from '../../Shared/Loading'
 import Button from '../../Shared/Button'
+import EventForm from '../../../EventForm'
 
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+const { arrayOf, bool, string, shape, func } = React.PropTypes
 
-const EventList = ({ data, gotoEvent, openNewRoundModal }) => {
+const EventList = ({ data, seasonId, gotoEvent, openNewRoundModal }) => {
   if (data.loading) {
     return <Loading text="Laddar rundor..." />
   }
 
   if (data.events.length === 0) {
     return (
-      <View style={{ flex: 1, backgroundColor: '#eee' }}>
-        <EmptyState text="Inga rundor :(" />
+      <div style={{ backgroundColor: '#eee' }}>
         <Button text="+ Lägg till ny runda" onClick={openNewRoundModal} />
-      </View>
+        <EventForm seasonId={seasonId} />
+        <EmptyState text="Inga rundor :(" />
+      </div>
     )
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#eee' }}>
-      <ListView
-        initialListSize={100}
-        dataSource={ds.cloneWithRows(data.events)}
-        renderRow={rowData => <EventCard event={rowData} gotoEvent={gotoEvent} />}
-        enableEmptySections
-      />
+    <div>
+      <ul>
+        { data.events.map(event => <li><EventCard event={event} gotoEvent={gotoEvent} /></li>) }
+      </ul>
       <Button text="+ Lägg till ny runda" onClick={openNewRoundModal} />
-    </View>
+      <EventForm seasonId={seasonId} />
+    </div>
   )
 }
-
-const { arrayOf, bool, string, shape, func } = React.PropTypes
 
 EventList.propTypes = {
   data: shape({
     loading: bool,
     events: arrayOf(shape())
   }),
+  seasonId: string.isRequired,
   gotoEvent: func.isRequired,
   openNewRoundModal: func.isRequired
 }
@@ -54,7 +52,6 @@ EventList.defaultProps = {
     events: []
   }
 }
-
 
 const eventsForSeasonQuery = gql`
   query eventsForSeasonQuery($seasonId: ID!) {

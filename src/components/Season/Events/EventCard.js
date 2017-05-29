@@ -13,26 +13,18 @@ const EventCard = ({ event, gotoEvent }) => {
   }
 
   return (
-    <div onClick={() => gotoEvent(event.id)}>
-      <div>
-        <div>
-          <span>
-            {moment(event.startsAt).format('ddd DD MMM').toUpperCase()}
-          </span>
+    <li onClick={() => gotoEvent(event.id)}>
+      {moment(event.startsAt).format('ddd DD MMM').toUpperCase()}
 
-          <span>
-            {event.teamEvent ? 'Lag' : 'Individuellt'}
-            {' ↝ '}
-            {gametypeName}
-          </span>
-        </div>
+      <span>
+        {event.teamEvent ? 'Lag' : 'Individuellt'}
+        {' ↝ '}
+        {gametypeName}
+      </span>
 
-        <div>
-          <span style={{ fontSize: 16, lineHeight: 25 }}>{event.club}</span>
-          <span style={{ fontSize: 16, lineHeight: 25 }}>{event.course}</span>
-        </div>
-      </div>
-    </div>
+      <span style={{ fontSize: 16, lineHeight: 1.5 }}>{event.club}</span>
+      <span style={{ fontSize: 16, lineHeight: 1.5 }}>{event.course}</span>
+    </li>
   )
 }
 

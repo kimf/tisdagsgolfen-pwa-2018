@@ -1,15 +1,17 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import SeasonPicker from '../components/Season/SeasonPicker'
 import Season from '../components/Season/Season'
+import Preview from '../components/Preview'
 import Loading from '../components/Shared/Loading'
 
-const Home = ({ data, match }) => {
-  const { loading, user, seasons } = data
+const { bool, func, string, array, shape } = React.PropTypes
 
+const Home = ({ data, onLogout }) => {
+  const { loading, user, seasons } = data
   if (loading) {
     return (
       <div className="container">
@@ -18,31 +20,50 @@ const Home = ({ data, match }) => {
     )
   }
 
-  const currentSeasonName = match.params.seasonName
-  if (!currentSeasonName || currentSeasonName === '') {
-    return <Redirect to={`/${seasons[0].name}`} />
-  }
-
-  const season = seasons.find(s => s.name === currentSeasonName)
-
   return (
-    <div className="wrapper">
-      <Link to="/profile"> 🏌Profil </Link>
-      <hr />
+    <Router>
+      <div className="wrapper">
+        Hej {user.firstName}
+        <a
+          href="#logout"
+          onClick={(e) => {
+            e.preventDefault()
+            onLogout(user.email)
+          }}
+        >
+          LOGGA UT
+        </a>
+        <hr />
 
-      <SeasonPicker
-        seasons={seasons}
-        currentSeasonName={season.name}
-      />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <div style={{ backgroundColor: '#fff' }}>
+                {seasons.map(season => (
+                  <Season key={season.id} season={season} userId={user.id} />
+                ))}
+              </div>
+            )}
+          />
 
-      <div style={{ backgroundColor: '#fff' }}>
-        <Season seasonName={currentSeasonName} seasonId={season.id} userId={user.id} />
+          <Route
+            path="/seasons/:seasonId/events/:eventId"
+            render={({ match }) => {
+              const season = seasons.find(s => s.id === match.params.seasonId)
+              const event = season.events.find(
+                e => e.id === match.params.eventId
+              )
+              return <Preview seasonId={season.id} event={event} />
+            }}
+          />
+        </Switch>
+
       </div>
-    </div>
+    </Router>
   )
 }
-
-const { bool, string, array, shape } = React.PropTypes
 
 Home.propTypes = {
   data: shape({
@@ -52,22 +73,43 @@ Home.propTypes = {
     }),
     seasons: array
   }).isRequired,
-  match: shape({
-    params: shape({
-      seasonName: string
-    })
-  }).isRequired
+  onLogout: func.isRequired
 }
-
 
 const userQuery = gql`
   query {
     user {
       id
+      firstName
     }
     seasons: allSeasons(orderBy: name_DESC) {
       id
       name
+      events (
+        orderBy: startsAt_DESC,
+      ) {
+        id
+        status
+        startsAt
+        oldCourseName
+        course {
+          id
+          club
+          name
+        }
+        scoringType
+        teamEvent
+        season {
+          id
+        }
+        scoringSessions {
+          id
+          status
+          scorer {
+            id
+          }
+        }
+      }
     }
   }
 `

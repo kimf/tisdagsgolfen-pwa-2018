@@ -11,8 +11,8 @@ body {
 
 ul {
   float: left;
-  width: 400px;
-  marign: 0;
+  width: 100%;
+  margin: 0 0 50px 0;
   padding: 0;
   margin-right: 40px;
   list-style: none;
@@ -35,12 +35,17 @@ li.finished {
   color: #fff;
 }
 
+li.live {
+  background: #c00;
+  color: #fff;
+}
+
 
 button {
   margin: 20px 0;
   padding: 10px 20px;
   font-size: 14px;
-  background: #777;
+  background: #21A0A0;
   color: #fff;
   border: 0;
 }
@@ -51,5 +56,28 @@ button {
   padding: 40px;
 }
 
-.wrapper {
+.eventList li h3 {
+  margin-bottom: 0;
+}
+
+table {
+  margin: 20px 0;
+  float: left;
+  width: 100%;
+}
+
+
+table thead th{
+  text-align: left;
+  padding: 5px 10px;
+  background: #ccc;
+}
+
+table tbody td {
+  text-align: left;
+  padding: 8px 10px;
+}
+
+tbody tr td {
+  border-bottom: 1px solid #ccc;
 }

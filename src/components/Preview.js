@@ -1,7 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import { compose } from 'react-apollo'
+import React, { Component } from "react";
+import { string, shape, func } from "prop-types";
 
-import EventCard from './Season/Events/EventCard'
+import { compose } from "react-apollo";
+
+import EventCard from "./Season/Events/EventCard";
 
 import {
   average,
@@ -10,38 +12,40 @@ import {
   massageIntoLeaderboard,
   setTeamEventPoints,
   setIndividualEventPoints,
-  playersFromTeamsWithScoreInfo
-} from '../utils'
+  playersFromTeamsWithScoreInfo,
+  buildNewEventLeaderboards,
+  buildNewSeasonLeaderboards
+} from "../utils";
 
-import withLiveLeaderboardQuery from '../graphql/queries/liveLeaderboardQuery'
-import withSeasonLeaderboardsQuery from '../graphql/queries/seasonLeaderboards'
-import withEventLeaderboardsQuery from '../graphql/queries/eventLeaderboards'
+import withLiveLeaderboardQuery from "../graphql/queries/liveLeaderboardQuery";
+import withSeasonLeaderboardsQuery from "../graphql/queries/seasonLeaderboards";
+import withEventLeaderboardsQuery from "../graphql/queries/eventLeaderboards";
 
-import withSetEventAsFinishedMutation from '../graphql/mutations/updateEvent'
-import withCreateScoreMutation from '../graphql/mutations/createScore'
+import withSetEventAsFinishedMutation from "../graphql/mutations/updateEvent";
+import withCreateScoreMutation from "../graphql/mutations/createScore";
 import withCreateEventLeaderboardMutation
-  from '../graphql/mutations/createEventLeaderboard'
+  from "../graphql/mutations/createEventLeaderboard";
 import withUpdateSeasonLeaderboardMutation
-  from '../graphql/mutations/updateSeasonLeaderboard'
+  from "../graphql/mutations/updateSeasonLeaderboard";
 
 const getItemName = (teamEvent, player) => {
   if (!teamEvent) {
-    return `${player.firstName} ${player.lastName.substr(0, 1)}`
+    return `${player.firstName} ${player.lastName.substr(0, 1)}`;
   }
-  return player.users.map(u => u.firstName).join(', ')
-}
+  return player.users.map(u => u.firstName).join(", ");
+};
 
-class Preview extends Component {
+export class Preview extends Component {
   static propTypes = {
-    event: PropTypes.shape().isRequired,
-    seasonId: PropTypes.string.isRequired,
-    scoringSessions: PropTypes.shape().isRequired,
-    seasonLeaderboards: PropTypes.shape().isRequired,
-    eventLeaderboards: PropTypes.shape().isRequired,
-    createScore: PropTypes.func.isRequired,
-    createEventLeaderboard: PropTypes.func.isRequired,
-    updateSeasonLeaderboard: PropTypes.func.isRequired,
-    setEventAsFinished: PropTypes.func.isRequired
+    event: shape().isRequired,
+    seasonId: string.isRequired,
+    scoringSessions: shape().isRequired,
+    seasonLeaderboards: shape().isRequired,
+    eventLeaderboards: shape().isRequired,
+    createScore: func.isRequired,
+    createEventLeaderboard: func.isRequired,
+    updateSeasonLeaderboard: func.isRequired,
+    setEventAsFinished: func.isRequired
   };
 
   state = { items: [] };
@@ -52,7 +56,7 @@ class Preview extends Component {
       scoringSessions,
       seasonLeaderboards,
       eventLeaderboards
-    } = nextProps
+    } = nextProps;
     if (
       scoringSessions.scoringSessions &&
       scoringSessions.scoringSessions.length > 0 &&
@@ -64,20 +68,20 @@ class Preview extends Component {
       const players = massageIntoLeaderboard(
         scoringSessions.scoringSessions,
         event.teamEvent
-      )
+      );
 
       const sortedPlayers = rankBySorting(
         players,
-        'totalPoints',
+        "totalPoints",
         event.teamEvent,
         event.scoringType
-      )
+      );
 
       const items = event.teamEvent
         ? setTeamEventPoints(sortedPlayers)
-        : setIndividualEventPoints(sortedPlayers)
+        : setIndividualEventPoints(sortedPlayers);
 
-      this.setState(state => ({ ...state, items }))
+      this.setState(state => ({ ...state, items }));
     }
   }
 
@@ -90,23 +94,22 @@ class Preview extends Component {
       createEventLeaderboard,
       updateSeasonLeaderboard,
       setEventAsFinished
-    } = this.props
-    const { items } = this.state
+    } = this.props;
+    const { items } = this.state;
 
-    let users = []
+    let users = [];
     if (event.teamEvent) {
       // users = [].concat(...items.map(item => item.users))
-      users = playersFromTeamsWithScoreInfo(items)
+      users = playersFromTeamsWithScoreInfo(items);
     } else {
-      users = items
+      users = items;
     }
 
-    const scores = []
-    // eslint-disable-next-line no-restricted-syntax
-    for (const user of users) {
-      const value = event.scoringType === 'strokes'
+    const scores = [];
+    users.forEach(user => {
+      const value = event.scoringType === "strokes"
         ? user.calculatedStrokes
-        : user.points
+        : user.points;
 
       scores.push(
         createScore(
@@ -117,75 +120,32 @@ class Preview extends Component {
           parseInt(user.earnings, 10) || 0,
           parseInt(user.beers, 10) || 0
         )
-      )
-    }
+      );
+    });
 
-    const savedScoresData = await Promise.all(scores)
+    const savedScoresData = await Promise.all(scores);
 
-    const savedScores = savedScoresData.map(ssd => ssd.data.score)
+    const savedScores = savedScoresData.map(ssd => ssd.data.score);
 
     // create local eventLeaderboards for all the saved scores, and prepare them
-    const newEventLeaderboards = []
-    savedScores.forEach((score) => {
-      const user = users.find(u => u.id === score.user.id)
-      const seasonLeaderboard = seasonLeaderboards.seasonLeaderboards.find(
-        sl => sl.user.id === user.id
-      )
-
-      newEventLeaderboards.push({
-        userId: user.id,
-        scoreId: score.id,
-        position: user.position,
-        previousTotalPosition: seasonLeaderboard.position
-      })
-    })
+    const newEventLeaderboards = buildNewEventLeaderboards(
+      savedScores,
+      users,
+      seasonLeaderboards
+    );
 
     // take all seasonLeaderboards, add local info and rank them
-    const newSeasonLeaderboards = []
-    seasonLeaderboards.seasonLeaderboards.forEach((sl) => {
-      const score = savedScores.find(ss => ss.user.id === sl.user.id)
-      if (score) {
-        const eventPointsArray = eventLeaderboards.eventLeaderboards
-          .filter(el => el.score.user.id === score.user.id)
-          .map(uel => uel.score.eventPoints)
-
-        const averagePoints = average([...eventPointsArray, score.eventPoints])
-
-        const top5Points = [...sl.top5Points, score.eventPoints]
-          .sort((a, b) => a - b)
-          .reverse()
-          .slice(0, 5)
-
-        const totalPoints = top5Points.reduce((a, b) => a + b, 0)
-
-        const totalKr = sl.totalKr + score.kr
-        const totalBeers = sl.totalBeers + score.beers
-        const userId = score.user.id
-
-        const newSl = {
-          ...sl,
-          top5Points,
-          eventCount: sl.eventCount + 1,
-          previousPosition: sl.position,
-          totalPoints,
-          averagePoints,
-          totalKr,
-          totalBeers,
-          userId
-        }
-
-        newSeasonLeaderboards.push(newSl)
-      }
-      newSeasonLeaderboards.push({
-        ...sl,
-        previousPosition: sl.position
-      })
-    })
+    const newSeasonLeaderboards = buildNewSeasonLeaderboards(
+      seasonLeaderboards,
+      eventLeaderboards,
+      savedScores
+    );
 
     // re-rank seasonLeaderboards with new data
-    const reRankedSeasonLeaderboards = rankedUsers(newSeasonLeaderboards)
-    const promises = []
-    reRankedSeasonLeaderboards.forEach((reranked) => {
+    const reRankedSeasonLeaderboards = rankedUsers(newSeasonLeaderboards);
+    const promises = [];
+
+    reRankedSeasonLeaderboards.forEach(reranked => {
       promises.push(
         updateSeasonLeaderboard(
           reranked.id,
@@ -198,34 +158,34 @@ class Preview extends Component {
           reranked.totalKr,
           reranked.totalBeers
         )
-      )
-    })
+      );
 
-    // add info to tmp eventLeaderboards and create them
-    newEventLeaderboards.forEach((nel) => {
-      const updatedSeasonLeaderboard = reRankedSeasonLeaderboards.find(
-        rrsl => rrsl.userId === nel.userId
-      )
-      promises.push(
-        createEventLeaderboard(
-          event.id,
-          nel.scoreId,
-          nel.position,
-          nel.previousTotalPosition,
-          updatedSeasonLeaderboard.position,
-          updatedSeasonLeaderboard.eventCount,
-          updatedSeasonLeaderboard.averagePoints,
-          updatedSeasonLeaderboard.totalPoints
-        )
-      )
-    })
+      // add info to tmp eventLeaderboard and create them
+      const newEventLeaderboard = newEventLeaderboards.find(
+        nel => nel.userId === reranked.userId
+      );
+      if (newEventLeaderboard) {
+        promises.push(
+          createEventLeaderboard(
+            event.id,
+            newEventLeaderboard.scoreId,
+            newEventLeaderboard.position,
+            newEventLeaderboard.previousTotalPosition,
+            reranked.position,
+            reranked.eventCount,
+            reranked.averagePoints,
+            reranked.totalPoints
+          )
+        );
+      }
+    });
 
-    await Promise.all(promises)
+    await Promise.all(promises);
 
-    await setEventAsFinished(event.id)
+    await setEventAsFinished(event.id);
 
     // eslint-disable-next-line no-alert
-    window.alert('KLAAAR!')
+    window.alert("KLAAAR!");
   };
 
   render() {
@@ -235,17 +195,12 @@ class Preview extends Component {
       eventLeaderboards,
       scoringSessions,
       seasonLeaderboards
-    } = this.props
+    } = this.props;
 
-    const { items } = this.state
+    const { items } = this.state;
 
-    if (
-      eventLeaderboards.loading ||
-      scoringSessions.loading ||
-      seasonLeaderboards.loading ||
-      items.length === 0
-    ) {
-      return null
+    if (items.length === 0) {
+      return null;
     }
 
     return (
@@ -267,13 +222,13 @@ class Preview extends Component {
             </tr>
           </thead>
           <tbody>
-            {items.map((player) => {
-              const itemName = getItemName(event.teamEvent, player)
+            {items.map(player => {
+              const itemName = getItemName(event.teamEvent, player);
 
               return (
                 <tr key={player.id}>
                   <td>{player.position}</td>
-                  <td style={{ width: '200px' }}>{itemName}</td>
+                  <td style={{ width: "200px" }}>{itemName}</td>
                   <td>{player.beers || 0}</td>
                   <td>{player.earnings || 0}</td>
                   <td>{player.strokes}</td>
@@ -281,7 +236,7 @@ class Preview extends Component {
                   <td>{player.points}</td>
                   <td>{player.eventPoints}</td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </table>
@@ -290,7 +245,7 @@ class Preview extends Component {
           SER BRA UT!
         </button>
       </div>
-    )
+    );
   }
 }
 
@@ -302,4 +257,4 @@ export default compose(
   withUpdateSeasonLeaderboardMutation,
   withCreateEventLeaderboardMutation,
   withSetEventAsFinishedMutation
-)(Preview)
+)(Preview);

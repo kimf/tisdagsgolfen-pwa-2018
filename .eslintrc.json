@@ -1,6 +1,9 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
+  "env": {
+    "jest": true
+  },
   "globals": {
     "window": true,
     "document": true
@@ -13,8 +16,14 @@
     "react/jsx-no-undef": 2,
     "react/jsx-wrap-multilines": 2,
     "react/jsx-filename-extension": 0,
-    "comma-dangle": [2, "never"],
-    "semi": [2, "never"],
+    "comma-dangle": [
+      2,
+      "never"
+    ],
+    "semi": [
+      2,
+      "never"
+    ],
     "no-undef": 2,
     "no-unused-vars": 2
   },

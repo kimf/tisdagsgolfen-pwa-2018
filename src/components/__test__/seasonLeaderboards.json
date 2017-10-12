@@ -1,0 +1,394 @@
+{
+  "data": {
+    "seasonLeaderboards": [
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1vyfkacf0146w1cy4yup",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvmpb8nu20171zwer1sgm"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1w1rkaeg0146kdfzaj4f",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvmpd8nu401713tjujg0m"
+        }
+      },
+      {
+        "totalKr": -30,
+        "totalBeers": 0,
+        "id": "cj33h1w4ckaew0146q9px0p4w",
+        "eventCount": 2,
+        "totalPoints": 20,
+        "previousPosition": 9,
+        "position": 4,
+        "averagePoints": 10,
+        "top5Points": [
+          20,
+          0
+        ],
+        "user": {
+          "id": "ciyruvmrm8nwf0171qu1l2j6d"
+        }
+      },
+      {
+        "totalKr": -20,
+        "totalBeers": 0,
+        "id": "cj33h1w6tkafc0146vl6x0big",
+        "eventCount": 1,
+        "totalPoints": 3,
+        "previousPosition": 7,
+        "position": 8,
+        "averagePoints": 3,
+        "top5Points": [
+          3
+        ],
+        "user": {
+          "id": "ciyruvms38nwh0171hov333vz"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1wa4kahp0146z9menpd2",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvms58nwj0171frq1tp58"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 1,
+        "id": "cj33h1wd7kak00146refzqkvp",
+        "eventCount": 2,
+        "totalPoints": 45,
+        "previousPosition": 2,
+        "position": 2,
+        "averagePoints": 22.5,
+        "top5Points": [
+          25,
+          20
+        ],
+        "user": {
+          "id": "ciyruvmtf8nwl01710gr1zi2j"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1wfxkakg0146x6jn8oeb",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvmtx8nwn017167tw3lwx"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1wipkald0146u4je6eem",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvmu08nwp0171x3i4fpbh"
+        }
+      },
+      {
+        "totalKr": 10,
+        "totalBeers": 0,
+        "id": "cj33h1wlbkama0146tmdneejf",
+        "eventCount": 1,
+        "totalPoints": 6,
+        "previousPosition": 6,
+        "position": 7,
+        "averagePoints": 6,
+        "top5Points": [
+          6
+        ],
+        "user": {
+          "id": "ciyruvmwd8nwr0171iyxdx57b"
+        }
+      },
+      {
+        "totalKr": -20,
+        "totalBeers": 0,
+        "id": "cj33h1wo7kar80146pfye8hdf",
+        "eventCount": 1,
+        "totalPoints": 15,
+        "previousPosition": 3,
+        "position": 5,
+        "averagePoints": 15,
+        "top5Points": [
+          15
+        ],
+        "user": {
+          "id": "ciyruvmwu8nwt01711giqa76c"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1wqrkaro0146me2o3emc",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvnnb4klu0170rdae03ev"
+        }
+      },
+      {
+        "totalKr": -20,
+        "totalBeers": 1,
+        "id": "cj33h1wtekas40146cjwzyw7p",
+        "eventCount": 2,
+        "totalPoints": 50,
+        "previousPosition": 1,
+        "position": 1,
+        "averagePoints": 25,
+        "top5Points": [
+          25,
+          25
+        ],
+        "user": {
+          "id": "ciyruvnnw4klw0170cn2xbbmw"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1ww4kask0146wry6qfob",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvnov4kn401700syysk64"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1wytkat00146c10r9eps",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvnpu4koa0170etthu4hg"
+        }
+      },
+      {
+        "totalKr": -10,
+        "totalBeers": 1,
+        "id": "cj33h1x1kkatg0146wajxv0ka",
+        "eventCount": 2,
+        "totalPoints": 29,
+        "previousPosition": 4,
+        "position": 3,
+        "averagePoints": 14.5,
+        "top5Points": [
+          20,
+          9
+        ],
+        "user": {
+          "id": "ciyruvnq14koc0170pkxaov6q"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1x53kavs0146ggch46bc",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvnr34koe01701suknsna"
+        }
+      },
+      {
+        "totalKr": 10,
+        "totalBeers": 0,
+        "id": "cj33h1x7wkaxu01468ccasjdz",
+        "eventCount": 1,
+        "totalPoints": 9,
+        "previousPosition": 4,
+        "position": 6,
+        "averagePoints": 9,
+        "top5Points": [
+          9
+        ],
+        "user": {
+          "id": "ciyruvnsv4kog0170ydwgjguw"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1xaokaya0146qdapauo3",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvntr4koi0170pm5wrcdu"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1xdukb120146il86lav0",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvnuz4kok0170ik9oc9ey"
+        }
+      },
+      {
+        "totalKr": 0,
+        "totalBeers": 0,
+        "id": "cj33h1xgnkb1y01465i0k3s4h",
+        "eventCount": 0,
+        "totalPoints": 0,
+        "previousPosition": 6,
+        "position": 13,
+        "averagePoints": 0,
+        "top5Points": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "user": {
+          "id": "ciyruvnv94kom0170sqwozg6j"
+        }
+      },
+      {
+        "totalKr": -50,
+        "totalBeers": 0,
+        "id": "cj33h1xjwkb690146kssc2p70",
+        "eventCount": 1,
+        "totalPoints": 3,
+        "previousPosition": 7,
+        "position": 8,
+        "averagePoints": 3,
+        "top5Points": [
+          3
+        ],
+        "user": {
+          "id": "cj31bka68s4390167zfioank2"
+        }
+      }
+    ]
+  }
+}

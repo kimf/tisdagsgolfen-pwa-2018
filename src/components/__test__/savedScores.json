@@ -1,0 +1,42 @@
+[
+  {
+    "kr": 0,
+    "eventPoints": 25,
+    "beers": 0,
+    "id": "cj3fx1j4lr1790160h52wx2yl",
+    "value": 60,
+    "user": {
+      "id": "ciyruvmtf8nwl01710gr1zi2j"
+    }
+  },
+  {
+    "kr": 0,
+    "eventPoints": 25,
+    "beers": 0,
+    "id": "cj3fx1j53r17f0160hwb5v2y3",
+    "value": 60,
+    "user": {
+      "id": "ciyruvnnw4klw0170cn2xbbmw"
+    }
+  },
+  {
+    "kr": 0,
+    "eventPoints": 20,
+    "beers": 0,
+    "id": "cj3fx1j5ir17k0160qngy6f2y",
+    "value": 62,
+    "user": {
+      "id": "ciyruvmrm8nwf0171qu1l2j6d"
+    }
+  },
+  {
+    "kr": 0,
+    "eventPoints": 20,
+    "beers": 0,
+    "id": "cj3fx1j0tr1730160imwbxy8y",
+    "value": 62,
+    "user": {
+      "id": "ciyruvnq14koc0170pkxaov6q"
+    }
+  }
+]

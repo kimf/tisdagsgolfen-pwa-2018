@@ -1,0 +1,214 @@
+{
+  "data": {
+    "eventLeaderboards": [
+      {
+        "totalEventCount": 1,
+        "score": {
+          "id": "cj31dr820vmvv0185q9dkqy2o",
+          "eventPoints": 3,
+          "user": {
+            "id": "ciyruvms38nwh0171hov333vz"
+          }
+        },
+        "previousTotalPosition": 0,
+        "totalAveragePoints": 3,
+        "id": "cj33h4ry7i8p00127bffqa9mx",
+        "totalPosition": 7,
+        "position": 7,
+        "totalEventPoints": 3
+      },
+      {
+        "totalEventCount": 1,
+        "score": {
+          "id": "cj31drke0lx19015356169t4t",
+          "eventPoints": 9,
+          "user": {
+            "id": "ciyruvnq14koc0170pkxaov6q"
+          }
+        },
+        "previousTotalPosition": 0,
+        "totalAveragePoints": 9,
+        "id": "cj33h4ryk03ro0147bzrx6fkc",
+        "totalPosition": 4,
+        "position": 4,
+        "totalEventPoints": 9
+      },
+      {
+        "totalEventCount": 1,
+        "score": {
+          "id": "cj31drx13dwwx0124qvkrd9w7",
+          "eventPoints": 15,
+          "user": {
+            "id": "ciyruvmwu8nwt01711giqa76c"
+          }
+        },
+        "previousTotalPosition": 0,
+        "totalAveragePoints": 15,
+        "id": "cj33h4rynq64t0100b33eo9uj",
+        "totalPosition": 3,
+        "position": 3,
+        "totalEventPoints": 15
+      },
+      {
+        "totalEventCount": 1,
+        "score": {
+          "id": "cj31dj05eqg2x0189wckyj9x0",
+          "eventPoints": 25,
+          "user": {
+            "id": "ciyruvnnw4klw0170cn2xbbmw"
+          }
+        },
+        "previousTotalPosition": 0,
+        "totalAveragePoints": 25,
+        "id": "cj33h4rzilxi60146lqoo8bae",
+        "totalPosition": 1,
+        "position": 1,
+        "totalEventPoints": 25
+      },
+      {
+        "totalEventCount": 1,
+        "score": {
+          "id": "cj31dkaibh1mq0122eocmpthq",
+          "eventPoints": 20,
+          "user": {
+            "id": "ciyruvmtf8nwl01710gr1zi2j"
+          }
+        },
+        "previousTotalPosition": 0,
+        "totalAveragePoints": 20,
+        "id": "cj33h4s0mmdbg0180jzr0myjv",
+        "totalPosition": 2,
+        "position": 2,
+        "totalEventPoints": 20
+      },
+      {
+        "totalEventCount": 1,
+        "score": {
+          "id": "cj31dlbhehde40153d83esgw7",
+          "eventPoints": 9,
+          "user": {
+            "id": "ciyruvnsv4kog0170ydwgjguw"
+          }
+        },
+        "previousTotalPosition": 0,
+        "totalAveragePoints": 9,
+        "id": "cj33h4s1c8bmw0152nvrmgeel",
+        "totalPosition": 4,
+        "position": 4,
+        "totalEventPoints": 9
+      },
+      {
+        "totalEventCount": 1,
+        "score": {
+          "id": "cj31ds8jwwb910185k47c9tco",
+          "eventPoints": 6,
+          "user": {
+            "id": "ciyruvmwd8nwr0171iyxdx57b"
+          }
+        },
+        "previousTotalPosition": 0,
+        "totalAveragePoints": 6,
+        "id": "cj33h4s1zq69w01006260tu6c",
+        "totalPosition": 6,
+        "position": 6,
+        "totalEventPoints": 6
+      },
+      {
+        "totalEventCount": 1,
+        "score": {
+          "id": "cj31dqalnl1yz0153u6q3npos",
+          "eventPoints": 0,
+          "user": {
+            "id": "ciyruvmrm8nwf0171qu1l2j6d"
+          }
+        },
+        "previousTotalPosition": 0,
+        "totalAveragePoints": 0,
+        "id": "cj33h4s2di8ui0127cr9xnr5r",
+        "totalPosition": 9,
+        "position": 9,
+        "totalEventPoints": 0
+      },
+      {
+        "totalEventCount": 1,
+        "score": {
+          "id": "cj31dqwtk9t4601676usmtjm9",
+          "eventPoints": 3,
+          "user": {
+            "id": "cj31bka68s4390167zfioank2"
+          }
+        },
+        "previousTotalPosition": 0,
+        "totalAveragePoints": 3,
+        "id": "cj33h4s3rlxp701468d4ntgyb",
+        "totalPosition": 7,
+        "position": 7,
+        "totalEventPoints": 3
+      },
+      {
+        "totalEventCount": 2,
+        "score": {
+          "id": "cj3fx1j4lr1790160h52wx2tl",
+          "eventPoints": 25,
+          "user": {
+            "id": "ciyruvmtf8nwl01710gr1zi2j"
+          }
+        },
+        "previousTotalPosition": 2,
+        "totalAveragePoints": 22.5,
+        "id": "cj3fx1k4xphlb0138e4glz0ba",
+        "totalPosition": 2,
+        "position": 1,
+        "totalEventPoints": 45
+      },
+      {
+        "totalEventCount": 2,
+        "score": {
+          "id": "cj3fx1j5ir17k0160qngy6f2a",
+          "eventPoints": 20,
+          "user": {
+            "id": "ciyruvmrm8nwf0171qu1l2j6d"
+          }
+        },
+        "previousTotalPosition": 9,
+        "totalAveragePoints": 10,
+        "id": "cj3fx1m6opi3w0138sxbigqzu",
+        "totalPosition": 5,
+        "position": 2,
+        "totalEventPoints": 20
+      },
+      {
+        "totalEventCount": 2,
+        "score": {
+          "id": "cj3fx1j0tr1730160imwbxy8h",
+          "eventPoints": 20,
+          "user": {
+            "id": "ciyruvnq14koc0170pkxaov6q"
+          }
+        },
+        "previousTotalPosition": 4,
+        "totalAveragePoints": 14.5,
+        "id": "cj3fx1mk2pik501382elqrxpj",
+        "totalPosition": 3,
+        "position": 2,
+        "totalEventPoints": 29
+      },
+      {
+        "totalEventCount": 2,
+        "score": {
+          "id": "cj3fx1j53r17f0160hwb5v2r3",
+          "eventPoints": 25,
+          "user": {
+            "id": "ciyruvnnw4klw0170cn2xbbmw"
+          }
+        },
+        "previousTotalPosition": 1,
+        "totalAveragePoints": 25,
+        "id": "cj3fx1mknpio10138w47j5clc",
+        "totalPosition": 1,
+        "position": 1,
+        "totalEventPoints": 50
+      }
+    ]
+  }
+}

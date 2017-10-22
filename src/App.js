@@ -1,54 +1,55 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'react-apollo'
+import { bool } from 'prop-types'
+
 import Home from './containers/Home'
 import Login from './containers/Login'
+import Loading from './components/Shared/Loading'
 
-import { getCache, setCache } from './utils'
+import { withMainQuery, mainQueryProps } from './graphql/queries/mainQuery'
 
-class App extends Component {
-  state = { checkingLoggin: true, loggedOut: true, email: '' };
 
-  componentDidMount() {
-    getCache('currentUser').then((value) => {
-      if (value && value.token) {
-        this.setState({
-          checkingLoggin: false,
-          loggedOut: false,
-          email: value.email
-        })
-      } else {
-        const email = value ? value.email : ''
-        this.setState({ checkingLoggin: false, loggedOut: true, email })
-      }
-    })
-  }
-
-  logout = (email) => {
-    setCache('currentUser', { email }).then(() => {
-      this.setState({ loggedOut: true })
-    })
-  };
-
-  login = (email, token) => {
-    setCache('currentUser', { email, token }).then(() => {
-      this.setState({ loggedOut: false })
-    })
-  };
-
-  render() {
-    if (this.state.checkingLoggin) {
-      return null
-    }
-    if (this.state.loggedOut) {
-      return <Login email={this.state.email} onLogin={this.login} />
-    }
-
+const App = ({ data, loggedIn }) => {
+  if (!loggedIn) {
     return (
-      <div className="container">
-        <h2>Test PWA App</h2>
-        <Home onLogout={this.logout} />
+      <div className="centerwrapper">
+        <Login />
       </div>
     )
   }
+
+  if (data.loading) {
+    return (
+      <div className="container">
+        <Loading text="Startar golfbilarna..." />
+      </div>
+    )
+  }
+
+  return <Home />
 }
 
-export default App
+App.propTypes = {
+  data: mainQueryProps,
+  loggedIn: bool.isRequired
+}
+
+App.defaultProps = {
+  data: {
+    loading: true,
+    user: null,
+    seasons: null
+  }
+}
+
+const mapStateToProps = state => ({
+  loggedIn: state.app.loggedIn
+})
+
+
+export default compose(
+  connect(mapStateToProps),
+  withMainQuery
+)(App)
+

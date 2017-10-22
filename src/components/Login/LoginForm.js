@@ -1,10 +1,12 @@
 import React from 'react'
+import { string, func } from 'prop-types'
 
-const LoginForm = ({ email, password, changeValue }) =>
-  <div className="container">
+const LoginForm = ({ email, password, changeValue, onSubmit }) =>
+  (<form className="form" onSubmit={onSubmit}>
     <div className="inputWrapper">
-      <img src="/username.png" alt="Username" />
+      <label htmlFor="email">E-post</label>
       <input
+        name="email"
         autoCorrect={false}
         type="email"
         onChange={event => changeValue({ email: event.target.value })}
@@ -12,23 +14,23 @@ const LoginForm = ({ email, password, changeValue }) =>
       />
     </div>
     <div className="inputWrapper">
-      <img src="/password.png" alt="Password" />
+      <label htmlFor="password">Lösenord</label>
       <input
+        name="password"
         type="password"
         autoCorrect={false}
         onChange={event => changeValue({ password: event.target.value })}
         value={password}
       />
     </div>
-  </div>
-
-
-const { string, func } = React.PropTypes
+    <button onClick={onSubmit}>LOGGA IN</button>
+  </form>)
 
 LoginForm.propTypes = {
   email: string,
   password: string,
-  changeValue: func.isRequired
+  changeValue: func.isRequired,
+  onSubmit: func.isRequired
 }
 
 LoginForm.defaultProps = {

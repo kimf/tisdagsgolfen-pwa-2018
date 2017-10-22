@@ -1,33 +1,42 @@
 import React from 'react'
+import { arrayOf, bool, shape, string } from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import EventCard from './EventCard'
+import Loading from '../../Shared/Loading'
 import EmptyState from '../../Shared/EmptyState'
-
-const { arrayOf, shape, string } = React.PropTypes
+import withEventsQuery from '../../../graphql/queries/events'
 
 const EventList = ({ events, seasonId }) => {
-  if (events.length === 0) {
-    return (
-      <div style={{ backgroundColor: '#eee' }}>
-        <EmptyState text="Inga rundor :(" />
-      </div>
-    )
+  if (events.loading) {
+    return <Loading text="Laddar rundor..." />
+  }
+
+  let content = null
+  if (events.events.length === 0) {
+    content = <EmptyState text="Inga rundor :(" />
+  } else {
+    content = (<ul>
+      {events.events.map(event => (
+        <EventCard key={event.id} seasonId={seasonId} event={event} />
+      ))}
+    </ul>)
   }
 
   return (
     <div className="eventList">
-      <ul>
-        {events.map(event => (
-          <EventCard key={event.id} seasonId={seasonId} event={event} />
-        ))}
-      </ul>
+      <Link to="/spela" className="button">▸ FÖR SCORE</Link>
+      {content}
     </div>
   )
 }
 
 EventList.propTypes = {
-  events: arrayOf(shape()).isRequired,
+  events: shape({
+    loading: bool.isRequired,
+    events: arrayOf(shape())
+  }).isRequired,
   seasonId: string.isRequired
 }
 
-export default EventList
+export default withEventsQuery(EventList)

@@ -1,117 +1,56 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { BrowserRouter as Router, Redirect, Switch, Route } from 'react-router-dom'
+import { shape, arrayOf, func } from 'prop-types'
+import { connect } from 'react-redux'
 
 import Season from '../components/Season/Season'
-import Preview from '../components/Preview'
-import Loading from '../components/Shared/Loading'
+import NewSeason from '../components/Season/NewSeason'
+import Header from '../components/Shared/Header'
+import EmptyState from '../components/Shared/EmptyState'
+import NewRound from '../components/Play/NewRound'
 
-const { bool, func, string, array, shape } = React.PropTypes
+import { logout } from '../actions/app'
 
-const Home = ({ data, onLogout }) => {
-  const { loading, user, seasons } = data
-  if (loading) {
-    return (
-      <div className="container">
-        <Loading text="Startar golfbilarna..." />
-      </div>
-    )
-  }
+const Home = ({ user, seasons, onLogout }) => (
+  <Router>
+    <div className="app">
+      <Header user={user} seasons={seasons} onLogout={onLogout} />
 
-  return (
-    <Router>
       <div className="wrapper">
-        Hej {user.firstName}
-        <a
-          href="#logout"
-          onClick={(e) => {
-            e.preventDefault()
-            onLogout(user.email)
-          }}
-        >
-          LOGGA UT
-        </a>
-        <hr />
-
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <div style={{ backgroundColor: '#fff' }}>
-                {seasons.map(season => (
-                  <Season key={season.id} season={season} userId={user.id} />
-                ))}
-              </div>
-            )}
-          />
+          <Route exact path="/seasons/new" component={NewSeason} />
+          <Route exact path="/spela" component={NewRound} />
 
           <Route
-            path="/seasons/:seasonId/events/:eventId"
+            path="/:seasonId"
             render={({ match }) => {
-              const season = seasons.find(s => s.id === match.params.seasonId)
-              const event = season.events.find(
-                e => e.id === match.params.eventId
-              )
-              return <Preview seasonId={season.id} event={event} />
+              const season = seasons.find(s => s.name === match.params.seasonId)
+              return season ? <Season key={season.id} season={season} userId={user.id} /> : <EmptyState text="Oops, denna säsong finns inte, välj en annan" />
             }}
           />
-        </Switch>
 
+          <Route
+            path="/"
+            render={() => seasons.length === 0
+              ? <EmptyState text="Inga säsonger ännu!" />
+              : <Redirect to={`/${seasons[0].name}`} />}
+          />
+        </Switch>
       </div>
-    </Router>
-  )
-}
+    </div>
+  </Router>
+)
 
 Home.propTypes = {
-  data: shape({
-    loading: bool.isRequired,
-    user: shape({
-      id: string
-    }),
-    seasons: array
-  }).isRequired,
+  user: shape().isRequired,
+  seasons: arrayOf(shape()).isRequired,
   onLogout: func.isRequired
 }
 
-const userQuery = gql`
-  query {
-    user {
-      id
-      firstName
-    }
-    seasons: allSeasons(orderBy: name_DESC) {
-      id
-      name
-      events (
-        orderBy: startsAt_DESC,
-      ) {
-        id
-        status
-        startsAt
-        oldCourseName
-        course {
-          id
-          club
-          name
-        }
-        scoringType
-        teamEvent
-        season {
-          id
-        }
-        scoringSessions {
-          id
-          status
-          scorer {
-            id
-          }
-        }
-      }
-    }
-  }
-`
+const mapStateToProps = state => ({ ...state.app })
 
-export default graphql(userQuery)(Home)
+const mapDispatchToProps = dispatch => ({
+  onLogout: () => dispatch(logout())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

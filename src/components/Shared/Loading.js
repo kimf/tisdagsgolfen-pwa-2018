@@ -1,4 +1,5 @@
 import React from 'react'
+import { string } from 'prop-types'
 
 const containerStyle = {
   backgroundColor: '#eee'
@@ -11,13 +12,13 @@ const textStyle = {
 }
 
 const Loading = ({ text }) =>
-  <div style={containerStyle}>
-    <span style={textStyle}>{ text }</span>
-  </div>
+  (<div style={containerStyle}>
+    <span style={textStyle}>{text}</span>
+  </div>)
 
 
 Loading.propTypes = {
-  text: React.PropTypes.string
+  text: string
 }
 
 Loading.defaultProps = {

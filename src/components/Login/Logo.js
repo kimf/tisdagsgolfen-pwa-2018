@@ -2,8 +2,8 @@ import React from 'react'
 
 const styles = {
   image: {
-    width: 200,
-    height: 210
+    width: 100,
+    height: 105
   }
 }
 

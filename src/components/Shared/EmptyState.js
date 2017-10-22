@@ -1,11 +1,13 @@
 import React from 'react'
+import { string } from 'prop-types'
 
 const containerStyle = {
-  backgroundColor: '#fff'
-}
-
-const imageStyle = {
-  marginBottom: 40
+  backgroundColor: '#fff',
+  textAlign: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
+  display: 'flex',
+  flexDirection: 'column'
 }
 
 const textStyle = {
@@ -15,13 +17,13 @@ const textStyle = {
 }
 
 const EmptyState = ({ text }) =>
-  <div style={containerStyle}>
-    <img style={imageStyle} src="/emptystate.png" alt={text} />
-    <span style={textStyle}>{ text }</span>
-  </div>
+  (<div style={containerStyle}>
+    <img src="/emptystate.png" alt={text} />
+    <span style={textStyle}>{text}</span>
+  </div>)
 
 EmptyState.propTypes = {
-  text: React.PropTypes.string
+  text: string
 }
 
 EmptyState.defaultProps = {

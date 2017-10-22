@@ -1,10 +1,8 @@
-import ApolloClient, { createBatchingNetworkInterface } from 'apollo-client'
+import ApolloClient, { createNetworkInterface } from 'apollo-client'
 import { getCache } from './utils'
 
-const dataIdFromObject = result => result.id
-
-const networkInterface = createBatchingNetworkInterface({
-  uri: 'https://api.graph.cool/simple/v1/ciyqax2o04t37012092ntrd7e',
+const networkInterface = createNetworkInterface({
+  uri: 'http://localhost:60000/simple/v1/cj8x7ymvj000401504ftye6he',
   batchInterval: 10,
   queryDeduplication: true
 })
@@ -32,5 +30,5 @@ networkInterface.use([
 
 export default new ApolloClient({
   networkInterface,
-  dataIdFromObject
+  dataIdFromObject: o => o.id
 })

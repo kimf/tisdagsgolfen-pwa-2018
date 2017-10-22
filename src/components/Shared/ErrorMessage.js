@@ -1,4 +1,5 @@
 import React from 'react'
+import { string } from 'prop-types'
 
 const styles = {
   errorText: {
@@ -12,10 +13,14 @@ const styles = {
   }
 }
 
-const LoginError = () => (
+const ErrorMessage = ({ text }) => (
   <span style={styles.errorText}>
-    Något gick fel, se över infon
+    {text}
   </span>
 )
 
-export default LoginError
+ErrorMessage.propTypes = {
+  text: string.isRequired
+}
+
+export default ErrorMessage

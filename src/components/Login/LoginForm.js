@@ -7,7 +7,6 @@ const LoginForm = ({ email, password, changeValue, onSubmit }) =>
       <label htmlFor="email">E-post</label>
       <input
         name="email"
-        autoCorrect={false}
         type="email"
         onChange={event => changeValue({ email: event.target.value })}
         value={email}

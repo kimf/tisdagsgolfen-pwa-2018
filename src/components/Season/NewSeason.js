@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 // import { string, func } from 'prop-types'
 import withCreateSeasonMutation from '../../graphql/mutations/createSeason'
 
+import Header from '../Shared/Header'
+
 class NewSeason extends Component {
   state = { name: '' }
 
@@ -24,8 +26,8 @@ class NewSeason extends Component {
   render() {
     const { name } = this.state
     return (
-      <div className="form">
-        <h2>Skapa ny säsong</h2>
+      <div className="container form">
+        <Header title="Skapa ny säsong" goBack />
         <div className="inputWrapper">
           <label htmlFor="name">Säsongens namn</label>
           <input

@@ -2,6 +2,11 @@ const initialState = {
   loggedIn: false,
   user: null,
   seasons: [],
+  play: {
+    course: null,
+    teamEvent: false,
+    isStrokes: false
+  },
   activeScoringSession: null
 }
 
@@ -17,6 +22,15 @@ export default (state = initialState, action) => {
     case 'LOGGED_OUT': {
       const user = { email: state.user.email }
       return { ...initialState, user }
+    }
+
+    case 'SET_PLAY_VALUE': {
+      const { key, value } = action
+      const play = {
+        ...state.play,
+        [key]: value
+      }
+      return { ...state, play }
     }
 
     case 'APOLLO_QUERY_RESULT': {

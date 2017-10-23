@@ -18,7 +18,6 @@ const LoginForm = ({ email, password, changeValue, onSubmit }) =>
       <input
         name="password"
         type="password"
-        autoCorrect={false}
         onChange={event => changeValue({ password: event.target.value })}
         value={password}
       />

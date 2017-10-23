@@ -9,28 +9,33 @@ const NewRoundSetup = ({ setValue, course, teamEvent, isStrokes }) => (
   <div className="form">
     <h4>
       {course.club}: {course.name}
-      <button onClick={() => setValue('course', null)}>
+      <a onClick={() => setValue('course', null)}>
         Byt bana
-      </button>
+      </a>
     </h4>
 
-    <h5>Slaggolf?</h5>
-    <Switch
-      onChange={isS => setValue('isStrokes', isS)}
-      checkedChildren={'SLAG'}
-      unCheckedChildren={'POÄNG'}
-      checked={isStrokes}
-    />
+    <div className="cols">
+      <div className="col">
+        <h5>Slaggolf?</h5>
+        <Switch
+          onChange={isS => setValue('isStrokes', isS)}
+          checkedChildren={'SLAG'}
+          unCheckedChildren={'POÄNG'}
+          checked={isStrokes}
+        />
+      </div>
+      <div className="col">
+        <h5>Lagtävling?</h5>
+        <Switch
+          onChange={te => setValue('teamEvent', te)}
+          checkedChildren={'LAG'}
+          unCheckedChildren={'INDIVIDUELL'}
+          checked={teamEvent}
+        />
+      </div>
+    </div>
 
-    <h5>Lagtävling?</h5>
-    <Switch
-      onChange={te => setValue('teamEvent', te)}
-      checkedChildren={'LAG'}
-      unCheckedChildren={'INDIVIDUELL'}
-      checked={teamEvent}
-    />
-
-    {teamEvent ? <SetupTeam {...this.props} /> : <SetupIndividual {...this.props} />}
+    {teamEvent ? <SetupTeam /> : <SetupIndividual />}
   </div>
 )
 

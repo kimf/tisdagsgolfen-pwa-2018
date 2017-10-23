@@ -10,9 +10,7 @@ const mainQuery = gql`
       admin
       firstName
       lastName
-      photo {
-        url
-      }
+      photo
       scoringSession(
         filter: { status_in: "live" }
       ) {
@@ -34,9 +32,7 @@ const mainQuery = gql`
       id
       name
       closed
-      photo {
-        url
-      }
+      photo
     }
   }
 `

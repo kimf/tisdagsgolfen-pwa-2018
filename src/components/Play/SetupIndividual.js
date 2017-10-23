@@ -1,17 +1,24 @@
 import React, { Component } from 'react'
-import { func, shape } from 'prop-types'
+import { func, shape, string, bool } from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import update from 'immutability-helper'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
 
-import SetupPlayingCard from './SetupPlayingCard'
+import PlayerCard from './PlayerCard'
+import PlayerPicker from './PlayerPicker'
 
 import { withCreateScoringSessionMutation } from '../../graphql/mutations/createScoringSession'
 
 class SetupIndividual extends Component {
   static propTypes = {
+    courseId: string.isRequired,
+    isStrokes: bool.isRequired,
     currentUser: shape().isRequired,
-    createScoringSession: func.isRequired
+    createScoringSession: func.isRequired,
+    history: shape({
+      push: func.isRequired
+    }).isRequired
   }
 
   constructor(props) {
@@ -47,13 +54,13 @@ class SetupIndividual extends Component {
 
   startPlay = async () => {
     try {
-      const { currentUser, course, teamEvent, isStrokes, createScoringSession, history } = this.props
+      const { currentUser, courseId, isStrokes, createScoringSession, history } = this.props
       const scoringPlayers = this.state.playing.map(p => (
-        { extraStrokes: p.strokes, userId: p.id }
+        { extraStrokes: parseInt(p.strokes, 10), userId: p.id }
       ))
       const scoringType = isStrokes ? 'strokes' : 'points'
       const res = await createScoringSession(
-        course.id, currentUser.id, teamEvent, scoringType, scoringPlayers
+        courseId, currentUser.id, false, scoringType, scoringPlayers
       )
       history.push(`/spela/${res.data.createScoringSession.id}`)
     } catch (err) {
@@ -63,38 +70,38 @@ class SetupIndividual extends Component {
   }
 
 
-  openAddPlayer = () => {
-    this.setState(state => ({ ...state, modal: 'addPlayer' }))
-    // onAdd: this.onAddPlayer,
-    // addedIds: this.state.playing.map(p => p.id)
-  }
-
   render() {
     const { playing } = this.state
 
     return (
       <div>
-        <button onClick={this.openAddPlayer}>+ LÄGG TILL SPELARE</button>
+        <h3>Valda spelare</h3>
         {playing.map((pl) => {
           const props = {
             onRemove: this.onRemove,
-            onChangeStrokes: this.onChangeStrokes,
-            teamEvent: false
+            onChangeStrokes: this.onChangeStrokes
           }
-          return <SetupPlayingCard key={`setup_pl_${pl.id}`} item={pl} {...props} />
+          return <PlayerCard key={`setup_pl_${pl.id}`} item={pl} {...props} />
         })}
 
-        <button onClick={this.startPlay}>STARTA RUNDA</button>
+        <PlayerPicker addedIds={playing.map(p => p.id)} onAdd={this.onAddPlayer} />
+
+        <button className="bottomButton" onClick={this.startPlay}>STARTA RUNDA</button>
       </div>
     )
   }
 }
 
 
-const mapStateToProps = state => ({ currentUser: state.app.currentUser })
+const mapStateToProps = state => ({
+  currentUser: state.app.user,
+  courseId: state.app.play.course.id,
+  isStrokes: state.app.play.isStrokes
+})
 
 export default compose(
   connect(mapStateToProps),
-  withCreateScoringSessionMutation
+  withCreateScoringSessionMutation,
+  withRouter
 )(SetupIndividual)
 

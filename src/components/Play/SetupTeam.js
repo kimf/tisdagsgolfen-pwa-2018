@@ -1,16 +1,23 @@
 import React, { Component } from 'react'
-import { shape, func } from 'prop-types'
+import { shape, func, string, bool } from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import update from 'immutability-helper'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
 
-import SetupPlayingCard from './SetupPlayingCard'
+import TeamCard from './TeamCard'
+
 import { withCreateScoringSessionMutation } from '../../graphql/mutations/createScoringSession'
 
 class SetupTeamEvent extends Component {
   static propTypes = {
+    courseId: string.isRequired,
+    isStrokes: bool.isRequired,
     currentUser: shape().isRequired,
-    createScoringSession: func.isRequired
+    createScoringSession: func.isRequired,
+    history: shape({
+      push: func.isRequired
+    }).isRequired
   }
 
   constructor(props) {
@@ -77,24 +84,26 @@ class SetupTeamEvent extends Component {
     this.setState({ playing })
   }
 
-  openAddPlayer = (/* team*/) => {
-    this.setState(state => ({ ...state, modal: 'addPlayer' }))
-    // onAdd: this.onAddPlayer,
-    // addedIds: [].concat(...this.state.playing.map(t => t.players)).map(p => p.id),
-    // title: `Lägg till i Lag ${team.id + 1}`
+  onAddPlayerToTeam = (player, team) => {
+    const teamIndex = this.state.playing.findIndex(p => p.id === team.id)
+    const playing = update(
+      this.state.playing,
+      { [teamIndex]: { players: { $push: [player] } } }
+    )
+
+    this.setState({ playing })
   }
 
   startPlay = async () => {
     try {
-      const { currentUser, createScoringSession, navigation, history } = this.props
+      const { courseId, isStrokes, currentUser, createScoringSession, history } = this.props
 
       const scoringTeams = this.state.playing.map(team => (
-        { extraStrokes: team.strokes, usersIds: team.players.map(p => p.id) })
+        { extraStrokes: parseInt(team.strokes, 10), usersIds: team.players.map(p => p.id) })
       )
-
-      const event = navigation.state.params.event
+      const scoringType = isStrokes ? 'strokes' : 'points'
       const res = await createScoringSession(
-        event.id, event.course.id, currentUser.id, null, scoringTeams
+        courseId, currentUser.id, true, scoringType, null, scoringTeams
       )
       history.push(`/spela/${res.data.createScoringSession.id}`)
     } catch (err) {
@@ -106,28 +115,36 @@ class SetupTeamEvent extends Component {
   render() {
     const { playing } = this.state
 
+    const addedIds = [].concat(...playing.map(t => t.players)).map(p => p.id)
+
     return (
       <div>
-        <button onClick={this.onAddTeam}>+ LÄGG TILL LAG</button>
+        <a onClick={this.onAddTeam}>+ LÄGG TILL LAG</a>
         {playing.map((team) => {
           const props = {
+            addedIds,
             onRemove: this.onRemove,
             onChangeStrokes: this.onChangeStrokes,
             onRemovePlayerFromTeam: this.onRemovePlayerFromTeam,
-            onAddPlayerToTeam: () => this.openAddPlayer(team),
+            onAddPlayerToTeam: this.onAddPlayerToTeam,
             teamEvent: true
           }
-          return <SetupPlayingCard key={`setup_team_${team.id}`} item={team} {...props} />
+          return <TeamCard key={`setup_team_${team.id}`} item={team} {...props} />
         })}
-        <button onClick={this.startPlay}>STARTA RUNDA</button>
+        <button className="bottomButton" onClick={this.startPlay}>STARTA RUNDA</button>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({ currentUser: state.app.currentUser })
+const mapStateToProps = state => ({
+  currentUser: state.app.user,
+  courseId: state.app.play.course.id,
+  isStrokes: state.app.play.isStrokes
+})
 
 export default compose(
   connect(mapStateToProps),
-  withCreateScoringSessionMutation
+  withCreateScoringSessionMutation,
+  withRouter
 )(SetupTeamEvent)

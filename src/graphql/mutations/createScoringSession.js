@@ -9,6 +9,7 @@ const scoringSessionMutation = gql`
     $scoringType:String!,
     $scoringPlayers: [ScoringSessionscoringPlayersScoringPlayer!],
     $scoringTeams: [ScoringSessionscoringTeamsScoringTeam!]
+    $startsAt: DateTime!
   )
   {
     createScoringSession(
@@ -18,6 +19,7 @@ const scoringSessionMutation = gql`
       scoringType: $scoringType,
       scoringPlayers: $scoringPlayers
       scoringTeams: $scoringTeams
+      startsAt: $startsAt
       currentHole: 1
     ) {
       id

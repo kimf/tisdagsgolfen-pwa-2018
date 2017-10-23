@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { arrayOf, bool, shape, func } from 'prop-types'
+// import geolib from 'geolib'
 
 import CourseRow from './CourseRow'
 import Loading from '../Shared/Loading'
@@ -15,6 +16,13 @@ const filterCourses = cacheable((courses, query) => courses.filter((c) => {
   const trimmedQuery = fixString(query)
   return searchString.indexOf(trimmedQuery) !== -1
 }))
+
+// const nearbyCourses = cacheable(
+//   (location, courses) => {
+//     console.log(location)
+//     geolib.orderByDistance(location, courses)
+//   }
+// )
 
 const getPreviouslyPlayedCourses = cacheable(
   courses => courses.filter(c => c.events.count > 0).sort((a, b) => a.events.count - b.events.count)
@@ -36,13 +44,33 @@ class CoursePicker extends Component {
     }
   }
 
-  state = { query: '' }
+  state = { query: '', location: null }
+
+  // componentWillMount() {
+  //   const options = {
+  //     enableHighAccuracy: true,
+  //     timeout: 5000,
+  //     maximumAge: 0
+  //   }
+
+  //   // eslint-disable-next-line no-console
+  //   const error = err => console.warn(`ERROR(${err.code}): ${err.message}`)
+  //   const success = (pos) => {
+  //     this.setState(state => ({ ...state, location: pos.coords }))
+  //   }
+
+  //   navigator.geolocation.getCurrentPosition(success, error, options)
+  // }
 
   setSearchQuery = query => this.setState(state => ({ ...state, query }))
 
   render() {
     const { data, selectCourse } = this.props
-    const { query } = this.state
+    const { query /* location */ } = this.state
+
+    // if (!location) {
+    //   return <Loading text="Kollar position..." />
+    // }
 
     if (data.loading) {
       return <Loading text="Laddar banor..." />
@@ -51,6 +79,8 @@ class CoursePicker extends Component {
     if (data.courses.length === 0) {
       return <EmptyState text="Inga banor :(" />
     }
+
+    // const coursesByLocation = nearbyCourses(location, data.courses)
 
     let courses = []
     let previously = false
@@ -67,7 +97,6 @@ class CoursePicker extends Component {
         <div className="inputWrapper">
           <input
             autoCapitalize="words"
-            autoCorrect={false}
             placeholder="Sök bana eller klubb"
             onChange={q => this.setSearchQuery(q.target.value)}
             value={query}

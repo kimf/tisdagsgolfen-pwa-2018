@@ -25,6 +25,10 @@ a:hover {
   opacity: .9;
 }
 
+h4, h5, h6 {
+  margin: 10px 0;
+}
+
 ul {
   float: left;
   width: 100%;
@@ -61,6 +65,7 @@ button, a.button {
   margin: 20px 0;
   padding: 10px 20px;
   font-size: 14px;
+  font-weight: bold;
   background: #21A0A0;
   color: #fff;
   border: 0;
@@ -95,7 +100,7 @@ tbody tr td {
 
 
 .centerwrapper {
-  padding: 100px;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,10 +109,8 @@ tbody tr td {
 .login {
   padding: 40px;
   background: #fff;
-  min-width: 500px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0  8px #777;
 }
 
 label {
@@ -136,10 +139,22 @@ label {
 }
 
 
-.app > header {
+.header {
   background: #eee;
-  padding: 20px;
+  padding: 15px;
   display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+}
+
+.header .back {
+  font-size: 2em;
+  float: left;
+  margin: 0;
+  padding: 0;
 }
 
 header h2 {
@@ -163,10 +178,17 @@ header > a {
   border-bottom: 0;
 }
 
+header .seasons {
+  margin-left: 20px;
+}
+header .seasons a{
+  margin-right: 10px;
+}
+
 
 .wrapper {
   background: #fff;
-  padding: 40px;
+  padding: 60px 20px;
 }
 
 
@@ -182,6 +204,33 @@ a.selected {
   font-weight: bold;
 }
 
+.subnav {
+  border-bottom: 2px solid #eee;
+  height: 40px;
+  padding-top: 10px;
+}
+
+.subnav a {
+  margin: 0 10px 10px 0;
+}
+
+.subnav h2 {
+  margin: 0 20px 0 0;
+}
+
+.subnav .button {
+  padding: 5px 10px;
+}
+
+
+.cols {
+  margin: 0;
+  display: flex
+}
+
+.col {
+  flex: 1;
+}
 
 
 /* RC-Switch... TODO: Cleanup */
@@ -284,3 +333,58 @@ a.selected {
   }
 }
 /* END RC-SWITCH */
+
+
+
+.playerPicker {
+  margin: 0;
+  padding: 0;
+  float: left;
+  width: 100%;
+}
+
+.playerPicker li {
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+  padding: 10px 0;
+}
+
+.playerPicker li img, .setupPlayingCard img {
+  margin-right: 10px;
+}
+
+
+.setupPlayingCard {
+  position: relative;
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+  border: 2px solid #ccc;
+  background: #eee;
+  padding: 10px;
+}
+
+.setupPlayingCard a {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 0.8em;
+}
+
+.setupPlayingCard .strokes {
+  font-size: 1.1em;
+}
+.setupPlayingCard input {
+  width: 70%;
+}
+
+.bottomButton {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  text-align:center;
+}

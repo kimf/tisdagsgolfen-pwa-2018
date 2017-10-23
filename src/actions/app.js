@@ -18,3 +18,7 @@ export const login = (email, token) => (
     })
   }
 )
+
+
+export const setPlayValue = (key, value) =>
+  dispatch => dispatch({ type: 'SET_PLAY_VALUE', key, value })

@@ -6,7 +6,8 @@
   },
   "globals": {
     "window": true,
-    "document": true
+    "document": true,
+    "navigator": true
   },
   "rules": {
     "valid-jsdoc": 2,

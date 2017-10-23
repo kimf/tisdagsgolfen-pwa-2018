@@ -1,39 +1,44 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { shape, bool, func } from 'prop-types'
+import { connect } from 'react-redux'
 
+import Header from '../Shared/Header'
 import NewRoundSetup from './NewRoundSetup'
 import CoursePicker from './CoursePicker'
 
-class SetupRound extends Component {
-  state = {
-    course: null,
-    teamEvent: false,
-    isStrokes: false
-  }
+import { setPlayValue } from '../../actions/app'
 
-  setValue = (key, value) => this.setState(state => ({
-    ...state,
-    [key]: value
-  }))
+const NewRound = ({ course, teamEvent, isStrokes, setValue }) => (
+  <div className="container">
+    <Header title="Spela Golf!" goBack />
+    {course
+      ? <NewRoundSetup
+        setValue={setValue}
+        course={course}
+        teamEvent={teamEvent}
+        isStrokes={isStrokes}
+      />
+      : <CoursePicker selectCourse={val => setValue('course', val)} />
+    }
+  </div>
+)
 
-  render() {
-    const { course, teamEvent, isStrokes } = this.state
-
-    return (
-      <div>
-        <h3>Spela Golf!</h3>
-        <hr />
-        {course
-          ? <NewRoundSetup
-            setValue={this.setValue}
-            course={course}
-            teamEvent={teamEvent}
-            isStrokes={isStrokes}
-          />
-          : <CoursePicker selectCourse={val => this.setValue('course', val)} />
-        }
-      </div>
-    )
-  }
+NewRound.propTypes = {
+  course: shape(),
+  teamEvent: bool.isRequired,
+  isStrokes: bool.isRequired,
+  setValue: func.isRequired
 }
 
-export default SetupRound
+NewRound.defaultProps = {
+  course: null
+}
+
+const mapStateToProps = state => ({ ...state.app.play })
+
+const mapDispatchToProps = dispatch => ({
+  setValue: (key, val) => dispatch(setPlayValue(key, val))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewRound)
+

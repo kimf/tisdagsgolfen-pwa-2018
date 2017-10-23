@@ -1,6 +1,5 @@
 import React from 'react'
 import { arrayOf, bool, shape, string } from 'prop-types'
-import { Link } from 'react-router-dom'
 
 import EventCard from './EventCard'
 import Loading from '../../Shared/Loading'
@@ -25,7 +24,6 @@ const EventList = ({ events, seasonId }) => {
 
   return (
     <div className="eventList">
-      <Link to="/spela" className="button">▸ FÖR SCORE</Link>
       {content}
     </div>
   )

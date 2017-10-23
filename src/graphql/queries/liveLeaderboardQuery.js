@@ -26,9 +26,7 @@ const liveLeaderboardQuery = gql`
           id
           firstName
           lastName
-          photo {
-            url
-          }
+          photo
         }
       }
       scoringTeams {
@@ -49,9 +47,7 @@ const liveLeaderboardQuery = gql`
           id
           firstName
           lastName
-          photo {
-            url
-          }
+          photo
         }
       }
     }

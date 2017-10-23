@@ -5,11 +5,12 @@ import { Switch, Route } from 'react-router-dom'
 
 import EventList from './Events/EventList'
 import Leaderboard from './Leaderboard'
+import Header from '../Shared/Header'
 
 const Season = ({ season, ...rest }) => (
   <div className="container">
-    <h2>{season.name}</h2>
-    <nav>
+    <Header showPhoto />
+    <nav className="subnav">
       <NavLink activeClassName="selected" to={`/${season.name}`} exact>Ledartavla</NavLink>
       <NavLink activeClassName="selected" to={`/${season.name}/rundor`}>Rundor</NavLink>
     </nav>

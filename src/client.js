@@ -2,7 +2,7 @@ import ApolloClient, { createNetworkInterface } from 'apollo-client'
 import { getCache } from './utils'
 
 const networkInterface = createNetworkInterface({
-  uri: 'http://localhost:60000/simple/v1/cj8x7ymvj000401504ftye6he',
+  uri: 'http://localhost:60000/simple/v1/cj94a1ew6002l0198pmwbruv5',
   batchInterval: 10,
   queryDeduplication: true
 })

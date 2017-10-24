@@ -388,3 +388,34 @@ a.selected {
   padding: 20px 0;
   text-align:center;
 }
+
+.hole {
+  padding: 20px 0;
+}
+
+
+.hole header {
+  background: #eee;
+  padding: 10px;
+}
+
+.hole .subheader span {
+  color: #ccc;
+  font-size: 0.8em;
+  padding-right: 10px;
+}
+
+
+.scoreRow {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+
+.scoreItemText {
+  padding: 0 4px 0 0;
+}
+.scoreItemText.dimmed {
+  color: #ccc;
+}

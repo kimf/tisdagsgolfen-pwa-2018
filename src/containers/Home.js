@@ -10,7 +10,7 @@ import EmptyState from '../components/Shared/EmptyState'
 import NewRound from '../components/ScoringSetup/NewRound'
 import Scoring from '../components/Scoring/Scoring'
 
-const Home = ({ user, seasons, activeScoringSession }) => (
+const Home = ({ user, seasons }) => (
   <Router>
     <div className="app">
       <div className="wrapper">
@@ -32,9 +32,9 @@ const Home = ({ user, seasons, activeScoringSession }) => (
 
           <Route
             path="/"
-            render={() => seasons.length === 0
+            render={() => (seasons.length === 0
               ? <Redirect to="/seasons/new" />
-              : <Redirect to={`/${seasons[0].name}`} />}
+              : <Redirect to={`/${seasons[0].name}`} />)}
           />
         </Switch>
       </div>
@@ -44,19 +44,7 @@ const Home = ({ user, seasons, activeScoringSession }) => (
 
 Home.propTypes = {
   user: shape().isRequired,
-  seasons: arrayOf(shape()).isRequired,
-  activeScoringSession: shape({
-    course: shape({
-      id: string.isRequired,
-      name: string.isRequired,
-      club: string.isRequired
-    }).isRequired,
-    id: string.isRequired,
-    status: string.isRequired,
-    scorer: shape({
-      id: string.isRequired
-    }).isRequired
-  }),
+  seasons: arrayOf(shape()).isRequired
 }
 
 const mapStateToProps = state => ({ ...state.app })

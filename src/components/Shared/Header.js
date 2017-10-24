@@ -51,20 +51,33 @@ class Header extends Component {
   }
 
   render() {
-    const { user, seasons, title, showPhoto, history, goBack, activeScoringSession } = this.props
+    const {
+      user, seasons, title, showPhoto, history, goBack, activeScoringSession
+    } = this.props
 
     return (
       <header className="header">
-        {goBack ? <span className="back" onClick={e => e.preventDefault && history.goBack()}>←</span> : null}
+        {goBack
+          ? <span className="back" onClick={e => e.preventDefault && history.goBack()}>↤</span>
+          : null
+        }
         {showPhoto ? <PhotoLink user={user} /> : null}
-        {!title && <span className="seasons">
-          {seasons.map(season => <NavLink activeClassName="selected" key={season.id} to={`/${season.name}`}>{season.name}</NavLink>)}
-        </span>}
+        {!title &&
+          <span className="seasons">
+            {seasons.map(season => <NavLink activeClassName="selected" key={season.id} to={`/${season.name}`}>{season.name}</NavLink>)}
+          </span>
+        }
         {title && <strong>{title}</strong>}
         <span className="nav">
           {user && user.admin && !title ? <AdminNav /> : null}
-          {!title && !activeScoringSession ? <Link to="/spela" className="button">▸</Link> : null}
-          {!title && activeScoringSession ? <Link to={`/spela/${activeScoringSession.id}`} className="button">▸ FORTSÄTT</Link> : null}
+          {!title && !activeScoringSession
+            ? <Link to="/spela" className="button">▸</Link>
+            : null
+          }
+          {!title && activeScoringSession
+            ? <Link to={`/spela/${activeScoringSession.id}`} className="button">▸ FORTSÄTT</Link>
+            : null
+          }
         </span>
       </header>
 

@@ -36,9 +36,7 @@ const cmp = (a, b) => {
 export const rankedUsers = (realUsers) => {
   const rankings = []
   const users = realUsers.slice()
-  users.sort(
-    (a, b) => cmp(a.totalPoints, b.totalPoints) || cmp(a.average, b.average)
-  )
+  users.sort((a, b) => cmp(a.totalPoints, b.totalPoints) || cmp(a.average, b.average))
 
   users.reverse().forEach((user, i) => {
     const rankedUser = Object.assign({}, user)
@@ -243,8 +241,7 @@ const seasonPointsArray = (length) => {
   if (points.length < length) {
     const zeroPaddedPoints = points
     return Array.from(Array(length - points.length)).forEach(() =>
-      zeroPaddedPoints.push(0)
-    )
+      zeroPaddedPoints.push(0))
   }
 
   return points
@@ -274,9 +271,7 @@ export const setTeamEventPoints = (rankedScores) => {
         const splitPointSum = pointSum / hasSamePosition.length
         const multipledWithTwo = splitPointSum * 2
 
-        const item2 = rankedScores.find(
-          rs => rs.id === hasSamePosition[index].id
-        )
+        const item2 = rankedScores.find(rs => rs.id === hasSamePosition[index].id)
         item2.eventPoints = Math.round(multipledWithTwo / 2.0)
       })
     }
@@ -311,9 +306,7 @@ export const buildNewEventLeaderboards = (
   const newEventLeaderboards = []
   savedScores.forEach((score) => {
     const user = users.find(u => u.id === score.user.id)
-    const seasonLeaderboard = seasonLeaderboards.seasonLeaderboards.find(
-      sl => sl.user.id === user.id
-    )
+    const seasonLeaderboard = seasonLeaderboards.seasonLeaderboards.find(sl => sl.user.id === user.id)
 
     newEventLeaderboards.push({
       userId: user.id,
@@ -402,4 +395,18 @@ export const cacheable = (fn) => {
     lastResult = result
     return result
   }
+}
+
+
+export const calculateExtraStrokes = (holeIndex, playerStrokes, holesCount) => {
+  let extra = 0
+  if (holeIndex <= playerStrokes) {
+    extra = 1
+    if (playerStrokes > holesCount) {
+      if (holeIndex <= (playerStrokes - holesCount)) {
+        extra = 2
+      }
+    }
+  }
+  return extra
 }

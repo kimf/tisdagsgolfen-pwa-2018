@@ -7,10 +7,11 @@ const UserColumn = ({ teamEvent, item, scoreItem }) => {
     : `${item.user.firstName} ${item.user.lastName.substr(0, 1)}`
 
   return (
-    <span>
-      {name}
-      <small>{scoreItem.extraStrokes} extraslag</small>
-    </span>
+    <td>
+      <strong>{name}</strong>
+      <br />
+      <small> {scoreItem.extraStrokes} extraslag</small>
+    </td>
   )
 }
 

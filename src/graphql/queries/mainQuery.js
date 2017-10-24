@@ -16,6 +16,8 @@ const mainQuery = gql`
       ) {
         id
         status
+        scoringType
+        teamEvent
         scorer {
           id
         }

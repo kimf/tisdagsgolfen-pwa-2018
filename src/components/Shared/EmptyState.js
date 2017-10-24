@@ -18,9 +18,9 @@ const textStyle = {
 
 const EmptyState = ({ text }) =>
   (<div style={containerStyle}>
-    <img src="/emptystate.png" alt={text} />
+    <img src="/emptystate.png" alt={text} style={{ maxWidth: '100%' }} />
     <span style={textStyle}>{text}</span>
-  </div>)
+   </div>)
 
 EmptyState.propTypes = {
   text: string

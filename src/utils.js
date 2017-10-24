@@ -233,7 +233,7 @@ export const rankBySorting = (players, sorting, teamEvent, scoringType) => {
     : players.slice().sort((a, b) => b.points - a.points)
 
   const sortKey = isStrokePlay ? 'calculatedStrokes' : 'points'
-  return ranked(sortedPlayers, 'position', sortKey, !isStrokePlay)
+  return ranked(sortedPlayers, 'position', sortKey, isStrokePlay)
 }
 
 const seasonPointsArray = (length) => {

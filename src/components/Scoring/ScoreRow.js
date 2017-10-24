@@ -1,39 +1,35 @@
 // TODO: Refactor and dry this up! (Maybe make a special TeamScoreRow to remove ifs)
 import React from 'react'
-import { bool, func, shape, string } from 'prop-types'
+import { bool, shape, string } from 'prop-types'
 
 import ScoreItemText from './ScoreItemText'
 
-const ScoreRow = ({
-  teamEvent, scoreItem, scoringType, scoringId, toggleScoring
-}) => {
+const ScoreRow = ({ teamEvent, scoreItem, scoringType }) => {
   const strokes = scoringType === 'strokes'
-  return (
-    <div onClick={() => toggleScoring(scoringId)} className="scoreRow">
-      {teamEvent || !scoreItem.id ? null : <ScoreItemText dimmed title={scoreItem.beers} />}
-      {scoreItem.id
-        ? <ScoreItemText title={strokes ? scoreItem.strokes : scoreItem.strokes} />
-        : null
-      }
-      {teamEvent || !scoreItem.id ? null : <ScoreItemText title={scoreItem.putts} />}
+  return [
+    teamEvent || !scoreItem.id ? null : <td><ScoreItemText dimmed title={scoreItem.beers} /></td>,
+    scoreItem.id
+      ? <td><ScoreItemText title={strokes ? scoreItem.strokes : scoreItem.strokes} /></td>
+      : null,
+    teamEvent || !scoreItem.id ? null : <td><ScoreItemText title={scoreItem.putts} /></td>,
+    <td colSpan={scoreItem.id ? 1 : 4}>
       {scoreItem.id
         ? <ScoreItemText
           fontWeight="bold"
           textAlign="right"
           title={strokes ? (scoreItem.strokes - scoreItem.extraStrokes) : scoreItem.points}
         />
-        : <small>TRYCK HÄR</small>
+        : <small className="muted">TRYCK HÄR</small>
       }
-    </div>
-  )
+    </td>
+
+  ]
 }
 
 ScoreRow.propTypes = {
   teamEvent: bool.isRequired,
   scoreItem: shape().isRequired,
-  scoringType: string.isRequired,
-  scoringId: string.isRequired,
-  toggleScoring: func.isRequired
+  scoringType: string.isRequired
 }
 
 export default ScoreRow

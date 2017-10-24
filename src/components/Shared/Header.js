@@ -37,10 +37,10 @@ class Header extends Component {
       scorer: shape({
         id: string.isRequired
       }).isRequired
-    }),
+    }).isRequired,
     history: shape({
       goBack: func
-    })
+    }).isRequired
   }
 
   static defaultProps = {

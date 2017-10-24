@@ -188,7 +188,7 @@ header .seasons a{
 
 .wrapper {
   background: #fff;
-  padding: 60px 20px;
+  padding: 60px 10px;
 }
 
 
@@ -394,17 +394,6 @@ a.selected {
 }
 
 
-.hole header {
-  background: #eee;
-  padding: 10px;
-}
-
-.hole .subheader span {
-  color: #ccc;
-  font-size: 0.8em;
-  padding-right: 10px;
-}
-
 
 .scoreRow {
   padding: 10px;
@@ -417,5 +406,42 @@ a.selected {
   padding: 0 4px 0 0;
 }
 .scoreItemText.dimmed {
+  color: #ccc;
+}
+
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 10px;
+}
+
+.holeHeader span,
+.holeHeader h2 {
+  text-align: center;
+}
+
+.hole header {
+  background: #000;
+  color: #fff;
+}
+
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #000;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.muted {
   color: #ccc;
 }

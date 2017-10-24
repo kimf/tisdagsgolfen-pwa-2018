@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Redirect, Switch, Route } from 'react-router-dom'
-import { shape, arrayOf, string } from 'prop-types'
+import { shape, arrayOf } from 'prop-types'
 import { connect } from 'react-redux'
 
 import Profile from '../components/Profile'
@@ -9,6 +9,7 @@ import NewSeason from '../components/Season/NewSeason'
 import EmptyState from '../components/Shared/EmptyState'
 import NewRound from '../components/ScoringSetup/NewRound'
 import Scoring from '../components/Scoring/Scoring'
+import ScoringLeaderboard from '../components/Scoring/ScoringLeaderboard'
 
 const Home = ({ user, seasons }) => (
   <Router>
@@ -19,6 +20,7 @@ const Home = ({ user, seasons }) => (
           <Route exact path="/seasons/new" component={NewSeason} />
           <Route exact path="/spela" component={NewRound} />
           <Route exact path="/spela/:scoringSessionId" component={Scoring} />
+          <Route exact path="/spela/:scoringSessionId/ledartavla" component={ScoringLeaderboard} />
 
           <Route
             path="/:seasonId"

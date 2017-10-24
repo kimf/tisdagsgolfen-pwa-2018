@@ -2,11 +2,9 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const liveLeaderboardQuery = gql`
-  query liveLeaderboardQuery($eventId: ID!) {
+  query liveLeaderboardQuery {
     scoringSessions: allScoringSessions(
-      filter: {
-        event: { id: $eventId }
-      }
+      filter: { status_in: "live" }
     ) {
       scoringPlayers {
         id
@@ -54,11 +52,11 @@ const liveLeaderboardQuery = gql`
   }
 `
 
-const withLiveLeaderboardQuery = graphql(liveLeaderboardQuery, {
-  options: ({ event }) => ({
-    variables: { eventId: event.id }
-  }),
-  name: 'scoringSessions'
-})
+export default liveLeaderboardQuery
 
-export default withLiveLeaderboardQuery
+export const withLiveLeaderboardQuery = graphql(liveLeaderboardQuery, {
+  options: () => ({
+    fetchPolicy: 'network-only',
+    pollInterval: 30000
+  })
+})

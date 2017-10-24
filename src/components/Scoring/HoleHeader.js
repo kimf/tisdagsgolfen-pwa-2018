@@ -2,10 +2,10 @@ import React from 'react'
 import { number as numPropType } from 'prop-types'
 
 const HoleHeader = ({ par, number, index }) => (
-  <header className="header">
-    <span>Par {par}</span>
-    <h2 style={{ display: 'inline', margin: '0 20px' }}>{number}</h2>
-    <span>Hcp {index}</span>
+  <header className="header" style={{ display: 'flex' }}>
+    <span style={{ flex: 1 }}>Par {par}</span>
+    <h2 style={{ flex: 1 }}>{number}</h2>
+    <span style={{ flex: 1 }}>Hcp {index}</span>
   </header>
 )
 

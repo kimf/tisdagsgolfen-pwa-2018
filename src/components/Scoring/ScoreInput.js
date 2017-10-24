@@ -99,14 +99,14 @@ class ScoreInput extends Component {
     const { valueGroups } = this.state
     // TODO: Göm puttar + öl för Lagevents, och fnula ut hur göra med öl för lag
     return (
-      <div>
+      <td colSpan="3">
         <Picker
           optionGroups={optionGroups}
           valueGroups={valueGroups}
           onChange={this.handleChange}
         />
         <button onClick={this.onCloseScoreForm}>SPARA</button>
-      </div>
+      </td>
     )
   }
 }

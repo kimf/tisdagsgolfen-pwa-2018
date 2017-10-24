@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { func, shape, bool, number } from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { compose } from 'react-apollo'
 
 import { changeHole } from '../../actions/app'
 
 import HoleView from './HoleView'
 import Loading from '../Shared/Loading'
+
 import { withScoringSessionQuery } from '../../graphql/queries/scoringSessionQuery'
 import { withCancelRoundMutation } from '../../graphql/mutations/cancelRoundMutation'
 import { withFinishRoundMutation } from '../../graphql/mutations/finishRoundMutation'
@@ -79,10 +80,19 @@ class Scoring extends Component {
           scoringSession={scoringSession}
         />
         <footer>
+          {currentHole !== 1
+            ? <button onClick={() => onChangeHole(currentHole - 1)}>↤ FÖREG. HÅL</button>
+            : null
+          }
 
-          {currentHole !== 1 ? <button onClick={() => onChangeHole(currentHole - 1)}>↤ FÖREG. HÅL</button> : null}
-          <button>SCOREKORT</button>
-          {currentHole !== holesCount ? <button onClick={() => onChangeHole(currentHole + 1)}>NÄSTA HÅL ↦</button> : null}
+          <Link className="button" to={`/spela/${scoringSession.id}/ledartavla`}>
+            <span role="img" aria-label="scorecard">🗒️</span>
+          </Link>
+
+          {currentHole !== holesCount
+            ? <button onClick={() => onChangeHole(currentHole + 1)}>NÄSTA HÅL ↦</button>
+            : null
+          }
         </footer>
       </div>
     )

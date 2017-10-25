@@ -1,22 +1,22 @@
-import React from "react";
-import { shallow } from "enzyme";
+import React from 'react';
+import { shallow } from 'enzyme';
 
-import { Preview } from "../Preview";
+import { Preview } from '../Preview';
 
-const event = require("./event.json");
-const scoringSessions = require("./liveLeaderboard.json").data;
-const seasonLeaderboards = require("./seasonLeaderboards.json").data;
-const eventLeaderboards = require("./eventLeaderboards.json").data;
+const event = require('./event.json');
+const scoringSessions = require('./liveLeaderboard.json').data;
+const seasonLeaderboards = require('./seasonLeaderboards.json').data;
+const eventLeaderboards = require('./eventLeaderboards.json').data;
 
-const savedScores = require("./savedScores.json");
+const savedScores = require('./savedScores.json');
 const createScore = jest.fn(() => null);
 savedScores.forEach(score => {
   createScore.mockReturnValueOnce({
-    data: { score }
+    data: { score },
   });
 });
 
-const updatedSeasonLeaderboards = require("./updatedSeasonLeaderboards.json");
+const updatedSeasonLeaderboards = require('./updatedSeasonLeaderboards.json');
 const updateSeasonLeaderboard = jest.fn(() => null);
 
 const createEventLeaderboard = jest.fn();
@@ -24,25 +24,25 @@ const setEventAsFinished = jest.fn();
 
 const props = {
   event,
-  seasonId: "cizu2uvsi2anz0150bm8m58yi",
+  seasonId: 'cizu2uvsi2anz0150bm8m58yi',
   scoringSessions: {},
   seasonLeaderboards: {},
   eventLeaderboards: {},
   createScore,
   createEventLeaderboard,
   updateSeasonLeaderboard,
-  setEventAsFinished
+  setEventAsFinished,
 };
 
-test("Button to set scores are there", async () => {
+test('Button to set scores are there', async () => {
   const component = shallow(<Preview {...props} />);
   component.setProps({
     scoringSessions,
     seasonLeaderboards,
-    eventLeaderboards
+    eventLeaderboards,
   });
 
-  expect(component.find("button").length).toBe(1);
+  expect(component.find('button').length).toBe(1);
 
   await component.instance().finishRound();
 
@@ -57,7 +57,7 @@ test("Button to set scores are there", async () => {
       score.value,
       score.eventPoints,
       score.kr,
-      score.beers
+      score.beers,
     ]);
   });
 
@@ -72,11 +72,11 @@ test("Button to set scores are there", async () => {
       updatedSeasonLeaderboards[index].totalPoints,
       updatedSeasonLeaderboards[index].averagePoints,
       updatedSeasonLeaderboards[index].totalKr,
-      updatedSeasonLeaderboards[index].totalBeers
+      updatedSeasonLeaderboards[index].totalBeers,
     ]);
   });
 
-  const createdEventLeaderboards = require("./createdEventLeaderboards.json");
+  const createdEventLeaderboards = require('./createdEventLeaderboards.json');
   expect(createEventLeaderboard.mock.calls.length).toEqual(4);
   createdEventLeaderboards.forEach((item, index) => {
     expect(createEventLeaderboard.mock.calls[index]).toEqual([
@@ -87,7 +87,7 @@ test("Button to set scores are there", async () => {
       createdEventLeaderboards[index].totalPosition,
       createdEventLeaderboards[index].totalEventCount,
       createdEventLeaderboards[index].totalAveragePoints,
-      createdEventLeaderboards[index].totalEventPoints
+      createdEventLeaderboards[index].totalEventPoints,
     ]);
   });
 });

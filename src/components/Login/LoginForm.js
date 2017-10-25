@@ -1,8 +1,8 @@
-import React from 'react'
-import { string, func } from 'prop-types'
+import React from 'react';
+import { string, func } from 'prop-types';
 
-const LoginForm = ({ email, password, changeValue, onSubmit }) =>
-  (<form className="form" onSubmit={onSubmit}>
+const LoginForm = ({ email, password, changeValue, onSubmit }) => (
+  <form className="form" onSubmit={onSubmit}>
     <div className="inputWrapper">
       <label htmlFor="email">E-post</label>
       <input
@@ -22,19 +22,19 @@ const LoginForm = ({ email, password, changeValue, onSubmit }) =>
       />
     </div>
     <button onClick={onSubmit}>LOGGA IN</button>
-  </form>)
+  </form>
+);
 
 LoginForm.propTypes = {
   email: string,
   password: string,
   changeValue: func.isRequired,
-  onSubmit: func.isRequired
-}
+  onSubmit: func.isRequired,
+};
 
 LoginForm.defaultProps = {
   email: '',
-  password: ''
-}
+  password: '',
+};
 
-
-export default LoginForm
+export default LoginForm;

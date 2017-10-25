@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import { arrayOf, string, shape, func } from 'prop-types'
+import React, { Component } from 'react';
+import { arrayOf, string, shape, func } from 'prop-types';
 
-import PlayerPicker from './PlayerPicker'
+import PlayerPicker from './PlayerPicker';
 
-const getPhotoUrl = item => (item.photo ? { uri: item.photo.url } : '/defaultavatar.png')
+const getPhotoUrl = item =>
+  item.photo ? { uri: item.photo.url } : '/defaultavatar.png';
 
 class SetupPlayingCard extends Component {
   static propTypes = {
@@ -12,36 +13,38 @@ class SetupPlayingCard extends Component {
     onRemove: func.isRequired,
     onChangeStrokes: func.isRequired,
     onRemovePlayerFromTeam: func.isRequired,
-    onAddPlayerToTeam: func.isRequired
-  }
+    onAddPlayerToTeam: func.isRequired,
+  };
 
   static defaultProps = {
-    addedIds: []
-  }
-
+    addedIds: [],
+  };
 
   constructor(props) {
-    super(props)
-    this.state = { strokes: props.item.strokes }
+    super(props);
+    this.state = { strokes: props.item.strokes };
   }
 
-  state = { strokes: 0 }
+  state = { strokes: 0 };
 
   onChangeStrokes = (item, strokes) => {
-    this.setState(state => ({ ...state, strokes }))
-    this.props.onChangeStrokes(item, strokes)
-  }
+    this.setState(state => ({ ...state, strokes }));
+    this.props.onChangeStrokes(item, strokes);
+  };
 
   render() {
     const {
-      addedIds, item, onRemove, onRemovePlayerFromTeam, onAddPlayerToTeam
-    } = this.props
+      addedIds,
+      item,
+      onRemove,
+      onRemovePlayerFromTeam,
+      onAddPlayerToTeam,
+    } = this.props;
 
-    const name = `Lag ${item.id + 1}`
+    const name = `Lag ${item.id + 1}`;
 
     return (
       <div key={`setup_pl_${item.id}`} className="setupPlayingCard">
-
         <div>
           {item.players.map(player => (
             <img
@@ -70,16 +73,23 @@ class SetupPlayingCard extends Component {
 
         {item.players.map(player => (
           <span key={`teamEvent_item_pl_${player.id}`}>
-            <a className="remove" onClick={() => onRemovePlayerFromTeam(item, player)}>
+            <a
+              className="remove"
+              onClick={() => onRemovePlayerFromTeam(item, player)}
+            >
               Ta bort {player.firstName}
             </a>
             {player.firstName} {player.lastName}
           </span>
         ))}
-        <PlayerPicker team={item} addedIds={addedIds} onAdd={onAddPlayerToTeam} />
+        <PlayerPicker
+          team={item}
+          addedIds={addedIds}
+          onAdd={onAddPlayerToTeam}
+        />
       </div>
-    )
+    );
   }
 }
 
-export default SetupPlayingCard
+export default SetupPlayingCard;

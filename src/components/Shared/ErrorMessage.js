@@ -1,5 +1,5 @@
-import React from 'react'
-import { string } from 'prop-types'
+import React from 'react';
+import { string } from 'prop-types';
 
 const styles = {
   errorText: {
@@ -9,18 +9,14 @@ const styles = {
     marginHorizontal: 20,
     textAlign: 'center',
     color: '#ffffff',
-    marginBottom: 20
-  }
-}
+    marginBottom: 20,
+  },
+};
 
-const ErrorMessage = ({ text }) => (
-  <span style={styles.errorText}>
-    {text}
-  </span>
-)
+const ErrorMessage = ({ text }) => <span style={styles.errorText}>{text}</span>;
 
 ErrorMessage.propTypes = {
-  text: string.isRequired
-}
+  text: string.isRequired,
+};
 
-export default ErrorMessage
+export default ErrorMessage;

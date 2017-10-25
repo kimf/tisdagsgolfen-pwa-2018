@@ -1,5 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-const Leaderboard = () => <h3>Ledartavla</h3>
+const Leaderboard = () => <h3>Ledartavla</h3>;
 
-export default Leaderboard
+export default Leaderboard;

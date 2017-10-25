@@ -1,14 +1,13 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { compose } from 'react-apollo'
-import { bool } from 'prop-types'
+import React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'react-apollo';
+import { bool } from 'prop-types';
 
-import Home from './containers/Home'
-import Login from './containers/Login'
-import Loading from './components/Shared/Loading'
+import Home from './containers/Home';
+import Login from './containers/Login';
+import Loading from './components/Shared/Loading';
 
-import { withMainQuery, mainQueryProps } from './graphql/queries/mainQuery'
-
+import { withMainQuery, mainQueryProps } from './graphql/queries/mainQuery';
 
 const App = ({ data, loggedIn }) => {
   if (!loggedIn) {
@@ -16,7 +15,7 @@ const App = ({ data, loggedIn }) => {
       <div className="centerwrapper">
         <Login />
       </div>
-    )
+    );
   }
 
   if (data.loading) {
@@ -24,32 +23,27 @@ const App = ({ data, loggedIn }) => {
       <div className="container">
         <Loading text="Startar golfbilarna..." />
       </div>
-    )
+    );
   }
 
-  return <Home />
-}
+  return <Home />;
+};
 
 App.propTypes = {
   data: mainQueryProps,
-  loggedIn: bool.isRequired
-}
+  loggedIn: bool.isRequired,
+};
 
 App.defaultProps = {
   data: {
     loading: true,
     user: null,
-    seasons: null
-  }
-}
+    seasons: null,
+  },
+};
 
 const mapStateToProps = state => ({
-  loggedIn: state.app.loggedIn
-})
+  loggedIn: state.app.loggedIn,
+});
 
-
-export default compose(
-  connect(mapStateToProps),
-  withMainQuery
-)(App)
-
+export default compose(connect(mapStateToProps), withMainQuery)(App);

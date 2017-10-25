@@ -1,60 +1,59 @@
-import React from 'react'
-import { arrayOf, bool, shape, string, number } from 'prop-types'
+import React from 'react';
+import { arrayOf, bool, shape, string, number } from 'prop-types';
 
-const defaultPhoto = '/defaultavatar.png'
+const defaultPhoto = '/defaultavatar.png';
 
 const getItemName = (teamEvent, player) => {
   if (!teamEvent) {
-    return `${player.firstName} ${player.lastName.substr(0, 1)}`
+    return `${player.firstName} ${player.lastName.substr(0, 1)}`;
   }
-  return player.users.map(u => u.firstName).join(', ')
-}
-
+  return player.users.map(u => u.firstName).join(', ');
+};
 
 const ScoringLeaderboardCard = ({
-  player, sorting, scoringType, teamEvent
+  player,
+  sorting,
+  scoringType,
+  teamEvent,
 }) => {
-  let pointText
-  let pointValue = ''
-  let { position } = player.position
+  let pointText;
+  let pointValue = '';
+  let { position } = player.position;
 
-  const strokePlay = scoringType === 'strokes'
+  const strokePlay = scoringType === 'strokes';
 
   if (sorting === 'beers') {
-    pointValue = player.beers
-    pointText = '🍺'
-    position = player.beerPos
+    pointValue = player.beers;
+    pointText = '🍺';
+    position = player.beerPos;
   } else if (sorting === 'kr') {
-    pointValue = player.kr - (player.kr * 2)
-    pointText = 'kr'
-    position = player.krPos
+    pointValue = player.kr - player.kr * 2;
+    pointText = 'kr';
+    position = player.krPos;
   } else {
-    pointValue = strokePlay ? player.calculatedStrokes : player.points
-    pointText = strokePlay ? '' : 'p'
+    pointValue = strokePlay ? player.calculatedStrokes : player.points;
+    pointText = strokePlay ? '' : 'p';
   }
 
-  const itemName = getItemName(teamEvent, player)
+  const itemName = getItemName(teamEvent, player);
 
   return (
     <li key={player.id}>
-      <span>
-        {position}
-      </span>
-      {!teamEvent
-        ? <img width="20" height="20" src={player.photo || defaultPhoto} alt="user" />
-        : null
-      }
+      <span>{position}</span>
+      {!teamEvent ? (
+        <img
+          width="20"
+          height="20"
+          src={player.photo || defaultPhoto}
+          alt="user"
+        />
+      ) : null}
       <span>{itemName}</span>
-      {sorting === 'totalPoints'
-        ? <span>{player.strokes} slag, </span>
-        : null
-      }
-      <span>
-        {`${pointValue} ${pointText}`}
-      </span>
+      {sorting === 'totalPoints' ? <span>{player.strokes} slag, </span> : null}
+      <span>{`${pointValue} ${pointText}`}</span>
     </li>
-  )
-}
+  );
+};
 
 ScoringLeaderboardCard.propTypes = {
   player: shape({
@@ -66,18 +65,20 @@ ScoringLeaderboardCard.propTypes = {
     krPos: number,
     position: number.isRequired,
     photo: shape({
-      url: string.isRequired
+      url: string.isRequired,
     }),
     firstName: string,
     lastName: string,
-    users: arrayOf(shape({
-      firstName: string.isRequired,
-      lastName: string.isRequired
-    }).isRequired)
+    users: arrayOf(
+      shape({
+        firstName: string.isRequired,
+        lastName: string.isRequired,
+      }).isRequired,
+    ),
   }).isRequired,
   sorting: string.isRequired,
   scoringType: string.isRequired,
-  teamEvent: bool.isRequired
-}
+  teamEvent: bool.isRequired,
+};
 
-export default ScoringLeaderboardCard
+export default ScoringLeaderboardCard;

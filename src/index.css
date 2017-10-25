@@ -2,15 +2,19 @@
   box-sizing: border-box;
 }
 
-html, body, div#root, .app {
+html,
+body,
+div#root,
+.app {
   width: 100%;
   height: 100%;
 }
 
- body {
+body {
   background: #c0c0c0;
   color: #1b1f23;
-  font-family: Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+  font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono",
+    "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -22,10 +26,12 @@ a {
   text-decoration: none;
 }
 a:hover {
-  opacity: .9;
+  opacity: 0.9;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   margin: 10px 0;
 }
 
@@ -45,7 +51,6 @@ li {
   padding: 10px;
 }
 
-
 li.planned {
   background: #feb;
 }
@@ -60,17 +65,16 @@ li.live {
   color: #fff;
 }
 
-
-button, a.button {
+button,
+a.button {
   margin: 20px 0;
   padding: 10px 20px;
   font-size: 14px;
   font-weight: bold;
-  background: #21A0A0;
+  background: #21a0a0;
   color: #fff;
   border: 0;
 }
-
 
 .eventList li h3 {
   margin-bottom: 0;
@@ -82,8 +86,7 @@ table {
   width: 100%;
 }
 
-
-table thead th{
+table thead th {
   text-align: left;
   padding: 5px 10px;
   background: #ccc;
@@ -97,7 +100,6 @@ table tbody td {
 tbody tr td {
   border-bottom: 1px solid #ccc;
 }
-
 
 .centerwrapper {
   padding: 20px;
@@ -132,12 +134,10 @@ label {
   border: 1px solid #ccc;
 }
 
-
 .app {
   background: #fff;
   float: left;
 }
-
 
 .header {
   background: #eee;
@@ -172,7 +172,6 @@ header .nav a {
   margin: 0 10px;
 }
 
-
 header > a {
   color: #000;
   border-bottom: 0;
@@ -181,16 +180,14 @@ header > a {
 header .seasons {
   margin-left: 20px;
 }
-header .seasons a{
+header .seasons a {
   margin-right: 10px;
 }
-
 
 .wrapper {
   background: #fff;
   padding: 60px 10px;
 }
-
 
 header .button {
   margin: 0 20px;
@@ -222,16 +219,14 @@ a.selected {
   padding: 5px 10px;
 }
 
-
 .cols {
   margin: 0;
-  display: flex
+  display: flex;
 }
 
 .col {
   flex: 1;
 }
-
 
 /* RC-Switch... TODO: Cleanup */
 .rc-switch {
@@ -334,8 +329,6 @@ a.selected {
 }
 /* END RC-SWITCH */
 
-
-
 .playerPicker {
   margin: 0;
   padding: 0;
@@ -351,10 +344,10 @@ a.selected {
   padding: 10px 0;
 }
 
-.playerPicker li img, .setupPlayingCard img {
+.playerPicker li img,
+.setupPlayingCard img {
   margin-right: 10px;
 }
-
 
 .setupPlayingCard {
   position: relative;
@@ -386,14 +379,12 @@ a.selected {
   left: 0;
   width: 100%;
   padding: 20px 0;
-  text-align:center;
+  text-align: center;
 }
 
 .hole {
   padding: 20px 0;
 }
-
-
 
 .scoreRow {
   padding: 10px;
@@ -401,14 +392,12 @@ a.selected {
   border-bottom: 1px solid #eee;
 }
 
-
 .scoreItemText {
   padding: 0 4px 0 0;
 }
 .scoreItemText.dimmed {
   color: #ccc;
 }
-
 
 .modal {
   position: absolute;
@@ -430,7 +419,6 @@ a.selected {
   color: #fff;
 }
 
-
 footer {
   position: fixed;
   bottom: 0;
@@ -440,7 +428,6 @@ footer {
   display: flex;
   justify-content: center;
 }
-
 
 .muted {
   color: #ccc;

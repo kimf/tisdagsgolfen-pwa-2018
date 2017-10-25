@@ -1,30 +1,30 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 // import { string, func } from 'prop-types'
-import withCreateSeasonMutation from '../../graphql/mutations/createSeason'
+import withCreateSeasonMutation from '../../graphql/mutations/createSeason';
 
-import Header from '../Shared/Header'
+import Header from '../Shared/Header';
 
 class NewSeason extends Component {
-  state = { name: '' }
+  state = { name: '' };
 
-  onChange = (name) => {
-    this.setState({ name })
-  }
+  onChange = name => {
+    this.setState({ name });
+  };
 
   save = async () => {
-    const { createSeason, history } = this.props
-    const { name } = this.state
+    const { createSeason, history } = this.props;
+    const { name } = this.state;
     try {
-      const response = await createSeason(name)
-      history.push(`/${response.data.season.name}`)
+      const response = await createSeason(name);
+      history.push(`/${response.data.season.name}`);
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   render() {
-    const { name } = this.state
+    const { name } = this.state;
     return (
       <div className="container form">
         <Header title="Skapa ny säsong" goBack />
@@ -39,8 +39,8 @@ class NewSeason extends Component {
         </div>
         <button onClick={this.save}>SPARA</button>
       </div>
-    )
+    );
   }
 }
 
-export default withCreateSeasonMutation(NewSeason)
+export default withCreateSeasonMutation(NewSeason);

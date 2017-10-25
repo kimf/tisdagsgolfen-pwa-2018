@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
-import { arrayOf, bool, string, shape } from 'prop-types'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { compose } from 'react-apollo'
+import React, { Component } from 'react';
+import { arrayOf, bool, string, shape } from 'prop-types';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'react-apollo';
 
-import ScoringLeaderboardCard from './ScoringLeaderboardCard'
-import ScorecardHeaderRow from './ScorecardHeaderRow'
-import Header from '../Shared/Header'
-import Tabs from '../Shared/Tabs'
+import ScoringLeaderboardCard from './ScoringLeaderboardCard';
+import ScorecardHeaderRow from './ScorecardHeaderRow';
+import Header from '../Shared/Header';
+import Tabs from '../Shared/Tabs';
 // import Header from 'shared/Header'
 // import EventHeader from 'Events/EventHeader'
 
-import { withLiveLeaderboardQuery } from '../../graphql/queries/liveLeaderboardQuery'
-import { rankBySorting, massageIntoLeaderboard } from '../../utils'
+import { withLiveLeaderboardQuery } from '../../graphql/queries/liveLeaderboardQuery';
+import { rankBySorting, massageIntoLeaderboard } from '../../utils';
 
 class ScoringLeaderboard extends Component {
   static propTypes = {
@@ -22,22 +22,22 @@ class ScoringLeaderboard extends Component {
     teamEvent: bool.isRequired,
     data: shape({
       loading: bool,
-      scoringSessions: arrayOf(shape()) // TODO: How do we want the data to look?
-    })
-  }
+      scoringSessions: arrayOf(shape()), // TODO: How do we want the data to look?
+    }),
+  };
 
   static defaultProps = {
     data: {
       loading: true,
-      scoringSessions: []
-    }
-  }
+      scoringSessions: [],
+    },
+  };
 
-  state = { sorting: 'totalPoints' }
+  state = { sorting: 'totalPoints' };
 
-  changeSort = (sorting) => {
-    this.setState({ sorting })
-  }
+  changeSort = sorting => {
+    this.setState({ sorting });
+  };
 
   render() {
     const {
@@ -45,14 +45,14 @@ class ScoringLeaderboard extends Component {
       currentUserId,
       scoringSessionId,
       scoringType,
-      teamEvent
-    } = this.props
-    const { sorting } = this.state
+      teamEvent,
+    } = this.props;
+    const { sorting } = this.state;
 
-    let sortedPlayers = []
+    let sortedPlayers = [];
     if (data.scoringSessions && data.scoringSessions.length > 0) {
-      const players = massageIntoLeaderboard(data.scoringSessions, teamEvent)
-      sortedPlayers = rankBySorting(players, sorting, teamEvent, scoringType)
+      const players = massageIntoLeaderboard(data.scoringSessions, teamEvent);
+      sortedPlayers = rankBySorting(players, sorting, teamEvent, scoringType);
     }
 
     // TODO: Show tabs for teamEvents when you figured out how to solve the beers part
@@ -60,24 +60,22 @@ class ScoringLeaderboard extends Component {
       <div key="scoringLeaderboard">
         <Header title="Ledartavla" />
         <div className="leaderboard">
-          {teamEvent
-            ? null
-            : <Tabs
+          {teamEvent ? null : (
+            <Tabs
               teamEvent={teamEvent}
               currentRoute={sorting}
               onChange={sort => this.changeSort(sort)}
               scoringType={scoringType}
             />
-          }
+          )}
 
-          {sorting === 'totalPoints'
-            ? <ScorecardHeaderRow
+          {sorting === 'totalPoints' ? (
+            <ScorecardHeaderRow
               scoring={false}
               scoringType={scoringType}
               teamEvent={teamEvent}
             />
-            : null
-          }
+          ) : null}
 
           <ul>
             {sortedPlayers.map(item => (
@@ -92,9 +90,11 @@ class ScoringLeaderboard extends Component {
             ))}
           </ul>
         </div>
-        <Link to={`/spela/${scoringSessionId}`} className="button">STÄNG</Link>
+        <Link to={`/spela/${scoringSessionId}`} className="button">
+          STÄNG
+        </Link>
       </div>
-    )
+    );
   }
 }
 
@@ -102,10 +102,9 @@ const mapStateToProps = state => ({
   currentUserId: state.app.user.id,
   scoringSessionId: state.app.activeScoringSession.id,
   teamEvent: state.app.activeScoringSession.teamEvent,
-  scoringType: state.app.activeScoringSession.scoringType
-})
+  scoringType: state.app.activeScoringSession.scoringType,
+});
 
-export default compose(
-  connect(mapStateToProps),
-  withLiveLeaderboardQuery
-)(ScoringLeaderboard)
+export default compose(connect(mapStateToProps), withLiveLeaderboardQuery)(
+  ScoringLeaderboard,
+);

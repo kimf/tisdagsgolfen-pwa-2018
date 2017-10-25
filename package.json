@@ -6,11 +6,15 @@
     "enzyme": "^3.1.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-graphql": "^1.4.0-1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-prettier": "2.3.1",
     "eslint-plugin-react": "^7.4.0",
     "jest-enzyme": "^4.0.1",
+    "prettier": "1.7.4",
+    "prettier-eslint": "^8.2.1",
     "react-scripts": "^1.0.14",
     "react-test-renderer": "^16.0.0"
   },
@@ -40,7 +44,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
+    "build":
+      "react-scripts build && sw-precache --config=sw-precache-config.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

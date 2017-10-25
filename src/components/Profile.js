@@ -1,10 +1,10 @@
-import React from 'react'
-import { shape, func } from 'prop-types'
-import { connect } from 'react-redux'
+import React from 'react';
+import { shape, func } from 'prop-types';
+import { connect } from 'react-redux';
 
-import Header from './Shared/Header'
+import Header from './Shared/Header';
 
-import { logout } from '../actions/app'
+import { logout } from '../actions/app';
 
 const Profile = ({ user, onLogout }) => (
   <div className="container">
@@ -12,23 +12,23 @@ const Profile = ({ user, onLogout }) => (
     <a
       href="#logout"
       className="button"
-      onClick={(e) => {
-        e.preventDefault()
-        onLogout(user.email)
+      onClick={e => {
+        e.preventDefault();
+        onLogout(user.email);
       }}
     >
       LOGGA UT
-      </a>
+    </a>
   </div>
-)
+);
 
 Profile.propTypes = {
   user: shape().isRequired,
-  onLogout: func.isRequired
-}
+  onLogout: func.isRequired,
+};
 
 const mapDispatchToProps = dispatch => ({
-  onLogout: () => dispatch(logout())
-})
+  onLogout: () => dispatch(logout()),
+});
 
-export default connect(null, mapDispatchToProps)(Profile)
+export default connect(null, mapDispatchToProps)(Profile);

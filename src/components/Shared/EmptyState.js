@@ -1,5 +1,5 @@
-import React from 'react'
-import { string } from 'prop-types'
+import React from 'react';
+import { string } from 'prop-types';
 
 const containerStyle = {
   backgroundColor: '#fff',
@@ -7,27 +7,28 @@ const containerStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   display: 'flex',
-  flexDirection: 'column'
-}
+  flexDirection: 'column',
+};
 
 const textStyle = {
   fontWeight: 'bold',
   fontSize: 24,
-  color: '#ccc'
-}
+  color: '#ccc',
+};
 
-const EmptyState = ({ text }) =>
-  (<div style={containerStyle}>
+const EmptyState = ({ text }) => (
+  <div style={containerStyle}>
     <img src="/emptystate.png" alt={text} style={{ maxWidth: '100%' }} />
     <span style={textStyle}>{text}</span>
-   </div>)
+  </div>
+);
 
 EmptyState.propTypes = {
-  text: string
-}
+  text: string,
+};
 
 EmptyState.defaultProps = {
-  text: 'Inget att visa... ännu :('
-}
+  text: 'Inget att visa... ännu :(',
+};
 
-export default EmptyState
+export default EmptyState;

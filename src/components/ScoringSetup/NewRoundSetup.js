@@ -1,17 +1,15 @@
-import React from 'react'
-import { bool, string, shape, func } from 'prop-types'
-import Switch from 'rc-switch'
+import React from 'react';
+import { bool, string, shape, func } from 'prop-types';
+import Switch from 'rc-switch';
 
-import SetupIndividual from './SetupIndividual'
-import SetupTeam from './SetupTeam'
+import SetupIndividual from './SetupIndividual';
+import SetupTeam from './SetupTeam';
 
 const NewRoundSetup = ({ setValue, course, teamEvent, isStrokes }) => (
   <div className="form">
     <h4>
       {course.club}: {course.name}
-      <a onClick={() => setValue('course', null)}>
-        Byt bana
-      </a>
+      <a onClick={() => setValue('course', null)}>Byt bana</a>
     </h4>
 
     <div className="cols">
@@ -37,17 +35,17 @@ const NewRoundSetup = ({ setValue, course, teamEvent, isStrokes }) => (
 
     {teamEvent ? <SetupTeam /> : <SetupIndividual />}
   </div>
-)
+);
 
 NewRoundSetup.propTypes = {
   course: shape({
     id: string.isRequired,
     club: string.isRequired,
-    name: string.isRequired
+    name: string.isRequired,
   }).isRequired,
   teamEvent: bool.isRequired,
   isStrokes: bool.isRequired,
-  setValue: func.isRequired
-}
+  setValue: func.isRequired,
+};
 
-export default NewRoundSetup
+export default NewRoundSetup;

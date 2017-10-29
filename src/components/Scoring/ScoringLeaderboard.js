@@ -56,19 +56,18 @@ class ScoringLeaderboard extends Component {
     }
 
     // TODO: Show tabs for teamEvents when you figured out how to solve the beers part
-    return (
-      <div key="scoringLeaderboard">
-        <Header title="Ledartavla" />
-        <div className="leaderboard">
-          {!teamEvent && (
-            <Tabs
-              teamEvent={teamEvent}
-              currentRoute={sorting}
-              onChange={sort => this.changeSort(sort)}
-              scoringType={scoringType}
-            />
-          )}
-
+    return [
+      <Header title="Ledartavla" goBack />,
+      <div className="container">
+        {!teamEvent && (
+          <Tabs
+            teamEvent={teamEvent}
+            currentRoute={sorting}
+            onChange={sort => this.changeSort(sort)}
+            scoringType={scoringType}
+          />
+        )}
+        <table>
           {sorting === 'totalPoints' && (
             <ScorecardHeaderRow
               scoring={false}
@@ -76,8 +75,7 @@ class ScoringLeaderboard extends Component {
               teamEvent={teamEvent}
             />
           )}
-
-          <ul>
+          <tbody>
             {sortedPlayers.map(item => (
               <ScoringLeaderboardCard
                 key={`l_${item.id}`}
@@ -88,13 +86,10 @@ class ScoringLeaderboard extends Component {
                 teamEvent={teamEvent}
               />
             ))}
-          </ul>
-        </div>
-        <Link to={`/spela/${scoringSessionId}`} className="button">
-          STÄNG
-        </Link>
-      </div>
-    );
+          </tbody>
+        </table>
+      </div>,
+    ];
   }
 }
 

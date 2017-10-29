@@ -8,6 +8,8 @@ div#root,
 .app {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  background: #c0c0c0;
 }
 
 body {
@@ -134,24 +136,16 @@ label {
   border: 1px solid #ccc;
 }
 
-.app {
-  background: #fff;
-  float: left;
-}
-
 .header {
   background: #eee;
   padding: 15px;
   display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 60px;
 }
 
 .header .back {
-  font-size: 2em;
+  font-size: 1.2em;
   float: left;
   margin: 0;
   padding: 0;
@@ -184,14 +178,17 @@ header .seasons a {
   margin-right: 10px;
 }
 
-.wrapper {
-  background: #fff;
-  padding: 60px 10px;
-}
-
 header .button {
   margin: 0 20px;
   border-bottom: 0;
+}
+
+.container {
+  float: left;
+  width: 100%;
+  padding: 10px;
+  background: #fff;
+  height: 100%;
 }
 
 a.selected {
@@ -382,10 +379,6 @@ a.selected {
   text-align: center;
 }
 
-.hole {
-  padding: 20px 0;
-}
-
 .scoreRow {
   padding: 10px;
   margin-bottom: 10px;
@@ -409,6 +402,11 @@ a.selected {
   padding: 10px;
 }
 
+.holeHeader {
+  background: #000;
+  color: #fff;
+  padding: 10px;
+}
 .holeHeader span,
 .holeHeader h2 {
   text-align: center;
@@ -431,4 +429,17 @@ footer {
 
 .muted {
   color: #ccc;
+}
+
+button.block {
+  float: left;
+  width: 100%;
+}
+
+.holeWrapper {
+  padding: 5px;
+}
+
+.carousel {
+  height: 100%;
 }

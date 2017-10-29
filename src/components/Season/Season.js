@@ -6,17 +6,17 @@ import EventList from './Events/EventList';
 import Leaderboard from './Leaderboard';
 import Header from '../Shared/Header';
 
-const Season = ({ season, ...rest }) => (
+const Season = ({ season, ...rest }) => [
+  <Header showPhoto />,
+  <nav className="subnav">
+    <NavLink activeClassName="selected" to={`/${season.name}`} exact>
+      Ledartavla
+    </NavLink>
+    <NavLink activeClassName="selected" to={`/${season.name}/rundor`}>
+      Rundor
+    </NavLink>
+  </nav>,
   <div className="container">
-    <Header showPhoto />
-    <nav className="subnav">
-      <NavLink activeClassName="selected" to={`/${season.name}`} exact>
-        Ledartavla
-      </NavLink>
-      <NavLink activeClassName="selected" to={`/${season.name}/rundor`}>
-        Rundor
-      </NavLink>
-    </nav>
     <Switch>
       <Route
         exact
@@ -28,8 +28,8 @@ const Season = ({ season, ...rest }) => (
         render={() => <EventList {...rest} seasonId={season.id} />}
       />
     </Switch>
-  </div>
-);
+  </div>,
+];
 
 Season.propTypes = {
   userId: string.isRequired,

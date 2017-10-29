@@ -8,9 +8,9 @@ import CoursePicker from './CoursePicker';
 
 import { setPlayValue } from '../../actions/app';
 
-const NewRound = ({ course, teamEvent, isStrokes, setValue }) => (
+const NewRound = ({ course, teamEvent, isStrokes, setValue }) => [
+  <Header title="Spela Golf!" goBack />,
   <div className="container">
-    <Header title="Spela Golf!" goBack />
     {course ? (
       <NewRoundSetup
         setValue={setValue}
@@ -21,8 +21,8 @@ const NewRound = ({ course, teamEvent, isStrokes, setValue }) => (
     ) : (
       <CoursePicker selectCourse={val => setValue('course', val)} />
     )}
-  </div>
-);
+  </div>,
+];
 
 NewRound.propTypes = {
   course: shape(),

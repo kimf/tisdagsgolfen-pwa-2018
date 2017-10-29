@@ -16,7 +16,7 @@ const ScoringLeaderboardCard = ({
 }) => {
   let pointText;
   let pointValue = '';
-  let { position } = player.position;
+  let position;
 
   const strokePlay = scoringType === 'strokes';
 
@@ -31,25 +31,28 @@ const ScoringLeaderboardCard = ({
   } else {
     pointValue = strokePlay ? player.calculatedStrokes : player.points;
     pointText = strokePlay ? '' : 'p';
+    position = player.position;
   }
 
   const itemName = getItemName(teamEvent, player);
 
   return (
-    <li key={player.id}>
-      <span>{position}</span>
-      {!teamEvent && (
-        <img
-          width="20"
-          height="20"
-          src={player.photo || '/defaultavatar.png'}
-          alt="user"
-        />
-      )}
-      <span>{itemName}</span>
-      {sorting === 'totalPoints' && <span>{player.strokes} slag, </span>}
-      <span>{`${pointValue} ${pointText}`}</span>
-    </li>
+    <tr key={player.id}>
+      <td>{position}</td>
+      <td>
+        {!teamEvent && (
+          <img
+            width="20"
+            height="20"
+            src={player.photo || '/defaultavatar.png'}
+            alt="user"
+          />
+        )}
+        <span>{itemName}</span>
+      </td>
+      {sorting === 'totalPoints' && <td>{player.strokes} slag</td>}
+      <td>{`${pointValue} ${pointText}`}</td>
+    </tr>
   );
 };
 

@@ -25,9 +25,9 @@ class NewSeason extends Component {
 
   render() {
     const { name } = this.state;
-    return (
+    return [
+      <Header title="Skapa ny säsong" goBack />,
       <div className="container form">
-        <Header title="Skapa ny säsong" goBack />
         <div className="inputWrapper">
           <label htmlFor="name">
             Säsongens namn
@@ -40,8 +40,8 @@ class NewSeason extends Component {
           </label>
         </div>
         <button onClick={this.save}>SPARA</button>
-      </div>
-    );
+      </div>,
+    ];
   }
 }
 

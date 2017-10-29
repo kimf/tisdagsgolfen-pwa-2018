@@ -80,7 +80,7 @@ class ScoreInput extends Component {
 
     if (putts > strokes) {
       // eslint-disable-next-line
-      alert('Du verkar ha angett fler puttar än slag!');
+      alert("Du verkar ha angett fler puttar än slag!");
     } else {
       const strokeSum = strokes - extraStrokes;
       const testSum = strokeSum - par;
@@ -127,7 +127,9 @@ class ScoreInput extends Component {
           valueGroups={valueGroups}
           onChange={this.handleChange}
         />
-        <button onClick={this.onCloseScoreForm}>SPARA</button>
+        <button className="block" onClick={this.onCloseScoreForm}>
+          SPARA
+        </button>
       </td>
     );
   }

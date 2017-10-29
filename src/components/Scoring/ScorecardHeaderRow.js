@@ -3,11 +3,12 @@ import { bool, string } from 'prop-types';
 
 const ScorecardHeaderRow = ({ teamEvent, scoring, scoringType }) => {
   const puttsHeader = teamEvent ? null : <th>PUTT</th>;
-  const beersHeader = teamEvent ? null : <th>ÖL</th>;
+  const beersHeader = !scoring || teamEvent ? null : <th>ÖL</th>;
   const strokes = scoringType === 'strokes';
   return (
     <thead>
       <tr className="subheader">
+        {scoring ? <th>POS</th> : null}
         <th>SPELARE</th>
         {beersHeader}
         <th>{strokes ? 'BRUTTO' : 'SLAG'}</th>

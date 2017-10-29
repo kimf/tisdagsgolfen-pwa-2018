@@ -19,11 +19,7 @@ const App = ({ data, loggedIn }) => {
   }
 
   if (data.loading) {
-    return (
-      <div className="container">
-        <Loading text="Startar golfbilarna..." />
-      </div>
-    );
+    return <Loading text="Startar golfbilarna..." />;
   }
 
   return <Home />;

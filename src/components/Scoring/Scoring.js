@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { func, shape, bool, number } from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { compose } from 'react-apollo';
+import ReactSwipe from 'react-swipe';
 
 import { changeHole } from '../../actions/app';
 
@@ -69,44 +70,41 @@ class Scoring extends Component {
       : scoringSession.scoringPlayers;
     const holesCount = scoringSession.course.holes.length;
 
-    const hole = scoringSession.course.holes.find(
-      h => h.number === currentHole,
-    );
+    // const hole = scoringSession.course.holes.find(
+    //   h => h.number === currentHole,
+    // );
 
-    return (
-      <div>
-        <HoleView
-          key={`hole_view_${hole.id}`}
-          hole={hole}
-          isActive={hole.number === currentHole}
-          playing={playing}
-          holesCount={holesCount}
-          scoringSession={scoringSession}
-        />
-        <footer>
-          {currentHole !== 1 && (
-            <button onClick={() => onChangeHole(currentHole - 1)}>
-              ↤ FÖREG. HÅL
-            </button>
-          )}
-
-          <Link
-            className="button"
-            to={`/spela/${scoringSession.id}/ledartavla`}
-          >
-            <span role="img" aria-label="scorecard">
-              🗒️
-            </span>
-          </Link>
-
-          {currentHole !== holesCount && (
-            <button onClick={() => onChangeHole(currentHole + 1)}>
-              NÄSTA HÅL ↦
-            </button>
-          )}
-        </footer>
-      </div>
-    );
+    return [
+      <ReactSwipe
+        className="carousel"
+        swipeOptions={{
+          continuous: false,
+          startSlide: currentHole - 1,
+          callback: index => onChangeHole(index + 1),
+        }}
+      >
+        {scoringSession.course.holes.map(hole => (
+          <div className="holeWrapper">
+            <HoleView
+              key={`hole_view_${hole.id}`}
+              hole={hole}
+              isActive={hole.number === currentHole}
+              playing={playing}
+              holesCount={holesCount}
+              scoringSession={scoringSession}
+            />
+          </div>
+        ))}
+      </ReactSwipe>,
+      <footer>
+        <Link to={`/spela/${scoringSession.id}/ledartavla`}>
+          <span role="img" aria-label="scorecard">
+            🗒️
+          </span>
+          LEDARTAVLA
+        </Link>
+      </footer>,
+    ];
   }
 }
 

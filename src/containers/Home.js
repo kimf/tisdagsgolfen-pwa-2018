@@ -22,41 +22,37 @@ const fourOfourUrl = seasons =>
 const Home = ({ user, seasons }) => (
   <Router>
     <div className="app">
-      <div className="wrapper">
-        <Switch>
-          <Route exact path="/profil" render={() => <Profile user={user} />} />
-          <Route exact path="/seasons/new" component={NewSeason} />
-          <Route exact path="/spela" component={NewRound} />
-          <Route exact path="/spela/:scoringSessionId" component={Scoring} />
-          <Route
-            exact
-            path="/spela/:scoringSessionId/ledartavla"
-            component={ScoringLeaderboard}
-          />
+      <Switch>
+        <Route exact path="/profil" render={() => <Profile user={user} />} />
+        <Route exact path="/seasons/new" component={NewSeason} />
+        <Route exact path="/spela" component={NewRound} />
+        <Route exact path="/spela/:scoringSessionId" component={Scoring} />
+        <Route
+          exact
+          path="/spela/:scoringSessionId/ledartavla"
+          component={ScoringLeaderboard}
+        />
 
-          <Route
-            path="/:seasonId"
-            render={({ match }) => {
-              const season = seasons.find(
-                s => s.name === match.params.seasonId,
-              );
-              if (season) {
-                return (
-                  <Season key={season.id} season={season} userId={user.id} />
-                );
-              }
+        <Route
+          path="/:seasonId"
+          render={({ match }) => {
+            const season = seasons.find(s => s.name === match.params.seasonId);
+            if (season) {
               return (
-                <EmptyState text="Oops, denna säsong finns inte, välj en annan" />
+                <Season key={season.id} season={season} userId={user.id} />
               );
-            }}
-          />
+            }
+            return (
+              <EmptyState text="Oops, denna säsong finns inte, välj en annan" />
+            );
+          }}
+        />
 
-          <Route
-            path="/"
-            render={() => <Redirect to={fourOfourUrl(seasons)} />}
-          />
-        </Switch>
-      </div>
+        <Route
+          path="/"
+          render={() => <Redirect to={fourOfourUrl(seasons)} />}
+        />
+      </Switch>
     </div>
   </Router>
 );

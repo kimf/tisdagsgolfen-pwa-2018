@@ -6,9 +6,9 @@ import Header from './Shared/Header';
 
 import { logout } from '../actions/app';
 
-const Profile = ({ user, onLogout }) => (
+const Profile = ({ user, onLogout }) => [
+  <Header title={`${user.firstName} ${user.lastName}`} showPhoto goBack />,
   <div className="container">
-    <Header title={`${user.firstName} ${user.lastName}`} showPhoto goBack />
     <a
       href="#logout"
       className="button"
@@ -19,8 +19,8 @@ const Profile = ({ user, onLogout }) => (
     >
       LOGGA UT
     </a>
-  </div>
-);
+  </div>,
+];
 
 Profile.propTypes = {
   user: shape().isRequired,

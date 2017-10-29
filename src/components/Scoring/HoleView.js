@@ -33,10 +33,10 @@ class HoleView extends Component {
     const { teamEvent, scoringType } = scoringSession;
     const { scoringId } = this.state;
 
-    return (
-      <div className="hole">
-        <HoleHeader {...hole} />
-        <table>
+    return [
+      <HoleHeader {...hole} />,
+      <div className="container">
+        <table className="holeTable">
           <ScorecardHeaderRow
             teamEvent={teamEvent}
             scoringType={scoringType}
@@ -104,8 +104,8 @@ class HoleView extends Component {
             })}
           </tbody>
         </table>
-      </div>
-    );
+      </div>,
+    ];
   }
 }
 

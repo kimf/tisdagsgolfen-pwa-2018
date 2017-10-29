@@ -29,13 +29,15 @@ class NewSeason extends Component {
       <div className="container form">
         <Header title="Skapa ny säsong" goBack />
         <div className="inputWrapper">
-          <label htmlFor="name">Säsongens namn</label>
-          <input
-            name="name"
-            type="text"
-            onChange={event => this.onChange(event.target.value)}
-            value={name}
-          />
+          <label htmlFor="name">
+            Säsongens namn
+            <input
+              id="name"
+              type="text"
+              onChange={event => this.onChange(event.target.value)}
+              value={name}
+            />
+          </label>
         </div>
         <button onClick={this.save}>SPARA</button>
       </div>

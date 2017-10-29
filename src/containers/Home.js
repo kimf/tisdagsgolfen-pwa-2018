@@ -16,6 +16,9 @@ import NewRound from '../components/ScoringSetup/NewRound';
 import Scoring from '../components/Scoring/Scoring';
 import ScoringLeaderboard from '../components/Scoring/ScoringLeaderboard';
 
+const fourOfourUrl = seasons =>
+  seasons.length === 0 ? '/seasons/new' : `/${seasons[0].name}`;
+
 const Home = ({ user, seasons }) => (
   <Router>
     <div className="app">
@@ -37,9 +40,12 @@ const Home = ({ user, seasons }) => (
               const season = seasons.find(
                 s => s.name === match.params.seasonId,
               );
-              return season ? (
-                <Season key={season.id} season={season} userId={user.id} />
-              ) : (
+              if (season) {
+                return (
+                  <Season key={season.id} season={season} userId={user.id} />
+                );
+              }
+              return (
                 <EmptyState text="Oops, denna säsong finns inte, välj en annan" />
               );
             }}
@@ -47,12 +53,7 @@ const Home = ({ user, seasons }) => (
 
           <Route
             path="/"
-            render={() =>
-              seasons.length === 0 ? (
-                <Redirect to="/seasons/new" />
-              ) : (
-                <Redirect to={`/${seasons[0].name}`} />
-              )}
+            render={() => <Redirect to={fourOfourUrl(seasons)} />}
           />
         </Switch>
       </div>

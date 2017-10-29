@@ -60,7 +60,7 @@ class ScoringLeaderboard extends Component {
       <div key="scoringLeaderboard">
         <Header title="Ledartavla" />
         <div className="leaderboard">
-          {teamEvent ? null : (
+          {!teamEvent && (
             <Tabs
               teamEvent={teamEvent}
               currentRoute={sorting}
@@ -69,13 +69,13 @@ class ScoringLeaderboard extends Component {
             />
           )}
 
-          {sorting === 'totalPoints' ? (
+          {sorting === 'totalPoints' && (
             <ScorecardHeaderRow
               scoring={false}
               scoringType={scoringType}
               teamEvent={teamEvent}
             />
-          ) : null}
+          )}
 
           <ul>
             {sortedPlayers.map(item => (

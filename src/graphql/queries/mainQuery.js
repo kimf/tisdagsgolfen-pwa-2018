@@ -1,6 +1,6 @@
-import { arrayOf, shape, string, bool } from 'prop-types'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { arrayOf, shape, string, bool } from 'prop-types';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const mainQuery = gql`
   query mainQuery {
@@ -11,9 +11,7 @@ const mainQuery = gql`
       firstName
       lastName
       photo
-      scoringSession(
-        filter: { status_in: "live" }
-      ) {
+      scoringSession(filter: { status_in: "live" }) {
         id
         status
         scoringType
@@ -28,31 +26,29 @@ const mainQuery = gql`
         }
       }
     }
-    seasons: allSeasons(
-      orderBy: name_DESC
-    ) {
+    seasons: allSeasons(orderBy: name_DESC) {
       id
       name
       closed
       photo
     }
   }
-`
+`;
 
-export default mainQuery
+export default mainQuery;
 
 export const withMainQuery = graphql(mainQuery, {
-  skip: ({ loggedIn }) => !loggedIn
-})
+  skip: ({ loggedIn }) => !loggedIn,
+});
 
 export const seasonShape = shape({
   id: string.isRequired,
   closed: bool.isRequired,
   name: string.isRequired,
   photo: shape({
-    url: string
-  })
-})
+    url: string,
+  }),
+});
 
 export const mainQueryProps = shape({
   data: shape({
@@ -65,12 +61,12 @@ export const mainQueryProps = shape({
         id: string.isRequired,
         event: shape({
           course: shape({
-            name: string.isRequired
-          })
-        })
-      })
+            name: string.isRequired,
+          }),
+        }),
+      }),
     }),
     seasons: arrayOf(seasonShape),
-    loading: bool
-  })
-})
+    loading: bool,
+  }),
+});

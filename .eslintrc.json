@@ -20,6 +20,14 @@
     "react/jsx-filename-extension": 0,
     "no-undef": 2,
     "no-unused-vars": 2,
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ],
     "prettier/prettier": [
       "error",
       {

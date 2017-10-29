@@ -1,8 +1,6 @@
 import React from 'react';
 import { arrayOf, bool, shape, string, number } from 'prop-types';
 
-const defaultPhoto = '/defaultavatar.png';
-
 const getItemName = (teamEvent, player) => {
   if (!teamEvent) {
     return `${player.firstName} ${player.lastName.substr(0, 1)}`;
@@ -40,16 +38,16 @@ const ScoringLeaderboardCard = ({
   return (
     <li key={player.id}>
       <span>{position}</span>
-      {!teamEvent ? (
+      {!teamEvent && (
         <img
           width="20"
           height="20"
-          src={player.photo || defaultPhoto}
+          src={player.photo || '/defaultavatar.png'}
           alt="user"
         />
-      ) : null}
+      )}
       <span>{itemName}</span>
-      {sorting === 'totalPoints' ? <span>{player.strokes} slag, </span> : null}
+      {sorting === 'totalPoints' && <span>{player.strokes} slag, </span>}
       <span>{`${pointValue} ${pointText}`}</span>
     </li>
   );
@@ -64,9 +62,7 @@ ScoringLeaderboardCard.propTypes = {
     id: string.isRequired,
     krPos: number,
     position: number.isRequired,
-    photo: shape({
-      url: string.isRequired,
-    }),
+    photo: string.isRequired,
     firstName: string,
     lastName: string,
     users: arrayOf(

@@ -84,11 +84,11 @@ class Scoring extends Component {
           scoringSession={scoringSession}
         />
         <footer>
-          {currentHole !== 1 ? (
+          {currentHole !== 1 && (
             <button onClick={() => onChangeHole(currentHole - 1)}>
               ↤ FÖREG. HÅL
             </button>
-          ) : null}
+          )}
 
           <Link
             className="button"
@@ -99,11 +99,11 @@ class Scoring extends Component {
             </span>
           </Link>
 
-          {currentHole !== holesCount ? (
+          {currentHole !== holesCount && (
             <button onClick={() => onChangeHole(currentHole + 1)}>
               NÄSTA HÅL ↦
             </button>
-          ) : null}
+          )}
         </footer>
       </div>
     );

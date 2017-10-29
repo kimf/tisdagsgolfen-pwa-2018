@@ -43,17 +43,19 @@ class Header extends Component {
       scorer: shape({
         id: string.isRequired,
       }).isRequired,
-    }).isRequired,
+    }),
     history: shape({
       goBack: func,
     }).isRequired,
   };
 
   static defaultProps = {
+    activeScoringSession: null,
     goBack: false,
     seasons: [],
     showPhoto: false,
     title: null,
+    user: null,
   };
 
   render() {
@@ -70,12 +72,12 @@ class Header extends Component {
     return (
       <header className="header">
         {goBack ? (
-          <span
+          <button
             className="back"
             onClick={e => e.preventDefault && history.goBack()}
           >
             ↤
-          </span>
+          </button>
         ) : null}
         {showPhoto ? <PhotoLink user={user} /> : null}
         {!title && (
@@ -94,16 +96,18 @@ class Header extends Component {
         {title && <strong>{title}</strong>}
         <span className="nav">
           {user && user.admin && !title ? <AdminNav /> : null}
-          {!title && !activeScoringSession ? (
-            <Link to="/spela" className="button">
-              ▸
+          {!title && (
+            <Link
+              to={
+                activeScoringSession
+                  ? `/spela/${activeScoringSession.id}`
+                  : '/spela'
+              }
+              className="button"
+            >
+              {activeScoringSession ? '▸ FORTSÄTT' : '▸ SPELA'}
             </Link>
-          ) : null}
-          {!title && activeScoringSession ? (
-            <Link to={`/spela/${activeScoringSession.id}`} className="button">
-              ▸ FORTSÄTT
-            </Link>
-          ) : null}
+          )}
         </span>
       </header>
     );

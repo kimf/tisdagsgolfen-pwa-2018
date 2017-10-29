@@ -4,7 +4,7 @@ import { string } from 'prop-types';
 const styles = {
   errorText: {
     backgroundColor: 'rgba(255, 0, 0, 0.75)',
-    width: 'calc(100% - 40px)',
+    width: '100%',
     padding: 10,
     marginHorizontal: 20,
     textAlign: 'center',

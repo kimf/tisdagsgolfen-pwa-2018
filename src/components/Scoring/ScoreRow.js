@@ -8,23 +8,23 @@ const ScoreRow = ({ teamEvent, scoreItem, scoringType }) => {
   const strokes = scoringType === 'strokes';
   return [
     teamEvent || !scoreItem.id ? null : (
-      <td>
+      <td key={`scoreRow_td_1_${scoreItem.id}`}>
         <ScoreItemText dimmed title={scoreItem.beers} />
       </td>
     ),
     scoreItem.id ? (
-      <td>
+      <td key={`scoreRow_td_2_${scoreItem.id}`}>
         <ScoreItemText
           title={strokes ? scoreItem.strokes : scoreItem.strokes}
         />
       </td>
     ) : null,
     teamEvent || !scoreItem.id ? null : (
-      <td>
+      <td key={`scoreRow_td_3_${scoreItem.id}`}>
         <ScoreItemText title={scoreItem.putts} />
       </td>
     ),
-    <td colSpan={scoreItem.id ? 1 : 4}>
+    <td key={`scoreRow_td_4_${scoreItem.id}`} colSpan={scoreItem.id ? 1 : 4}>
       {scoreItem.id ? (
         <ScoreItemText
           fontWeight="bold"

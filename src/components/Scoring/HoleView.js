@@ -62,12 +62,13 @@ class HoleView extends Component {
 
               return (
                 <tr
-                  key={`hole_view_${item.id}`}
+                  key={`hole_view_${hole.id}_scoring_${item.id}`}
                   onClick={() =>
                     scoringId ? null : this.toggleScoring(item.id)}
                 >
                   {scoringId && scoringId !== item.id ? null : (
                     <UserColumn
+                      key={`scoreRow_${item.id}`}
                       teamEvent={teamEvent}
                       item={item}
                       scoreItem={scoreItem}
@@ -76,6 +77,7 @@ class HoleView extends Component {
 
                   {scoringId ? null : (
                     <ScoreRow
+                      key={`scoreRow_${scoreItem.id}`}
                       {...{
                         scoringType,
                         teamEvent,
@@ -87,6 +89,7 @@ class HoleView extends Component {
 
                   {scoringId !== item.id ? null : (
                     <ScoreInput
+                      key={`scoreInput${scoreItem.id}`}
                       scoreItem={scoreItem}
                       playerId={item.id}
                       holeId={hole.id}

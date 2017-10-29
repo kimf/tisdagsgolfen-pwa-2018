@@ -1,7 +1,6 @@
 import React from 'react';
 import { shape, string } from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, NavLink } from 'react-router-dom';
 
 import EventList from './Events/EventList';
 import Leaderboard from './Leaderboard';

@@ -10,7 +10,7 @@ const UserColumn = ({ teamEvent, item, scoreItem }) => {
     <td>
       <strong>{name}</strong>
       <br />
-      <small> {scoreItem.extraStrokes} extraslag</small>
+      <small>{scoreItem.extraStrokes} extraslag</small>
     </td>
   );
 };

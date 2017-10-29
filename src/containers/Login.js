@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import ErrorMessage from '../components/Shared/ErrorMessage';
 import Form from '../components/Login/LoginForm';
-import Logo from '../components/Login/Logo';
 
 import { login } from '../actions/app';
 import { withSigninUserMutation } from '../graphql/mutations/signinUser';
@@ -58,8 +57,8 @@ class Login extends Component {
 
     return (
       <div className="login center">
-        <Logo />
-        {error ? <ErrorMessage text="Något gick fel, se över infon" /> : null}
+        <img src="/logo.png" width="100" height="105" alt="Tisdagsgolfen" />
+        {!!error && <ErrorMessage text="Något gick fel, se över infon" />}
         <h1>Logga in</h1>
         <Form
           email={email}

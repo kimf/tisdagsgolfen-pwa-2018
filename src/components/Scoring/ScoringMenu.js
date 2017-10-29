@@ -1,38 +1,5 @@
 import React from 'react';
-import { Alert, View, StyleSheet } from 'react-native';
 import { arrayOf, shape, number, func } from 'prop-types';
-
-import TGText from 'shared/TGText';
-import TopButton from 'shared/TopButton';
-import RowButton from 'shared/RowButton';
-import { colors } from 'styles';
-
-const styles = StyleSheet.create({
-  inner: {
-    flex: 1,
-    paddingTop: 20,
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: '900',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  buttonRow: {
-    width: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginBottom: 40,
-  },
-  holeButton: {
-    paddingVertical: 14,
-    width: 40,
-  },
-  holeButtonText: {
-    textAlign: 'center',
-  },
-});
 
 const confirmCancel = cancelFunc => {
   Alert.alert(

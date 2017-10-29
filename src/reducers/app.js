@@ -84,6 +84,20 @@ export default (state = initialState, action) => {
         };
       }
 
+      if (action.operationName === 'createScoringSession') {
+        const scoringSession = action.result.data.createScoringSession;
+        return {
+          ...state,
+          activeScoringSession: scoringSession,
+          play: {
+            course: scoringSession.course,
+            teamEvent: scoringSession.teamEvent,
+            isStrokes: scoringSession.scoringType === 'strokes',
+            currentHole: 1,
+          },
+        };
+      }
+
       return state;
     }
 

@@ -39,10 +39,6 @@ class Header extends Component {
         club: string.isRequired,
       }).isRequired,
       id: string.isRequired,
-      status: string.isRequired,
-      scorer: shape({
-        id: string.isRequired,
-      }).isRequired,
     }),
     history: shape({
       goBack: func,

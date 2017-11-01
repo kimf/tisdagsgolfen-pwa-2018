@@ -9,8 +9,8 @@ import CoursePicker from './CoursePicker';
 import { setPlayValue } from '../../actions/app';
 
 const NewRound = ({ course, teamEvent, isStrokes, setValue }) => [
-  <Header title="Spela Golf!" goBack />,
-  <div className="container">
+  <Header key="newRoundHeader" title="Spela Golf!" goBack />,
+  <div key="newRoundContainer" className="container">
     {course ? (
       <NewRoundSetup
         setValue={setValue}

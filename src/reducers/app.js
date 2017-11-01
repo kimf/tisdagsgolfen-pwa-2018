@@ -50,8 +50,8 @@ export default (state = initialState, action) => {
       if (action.operationName === 'mainQuery') {
         const { data } = action.result;
         const { user, seasons } = data;
-        const activeScoringSession = user.scoringSession;
-        delete user.scoringSession;
+        const activeScoringSession = user.scoringSessions[0];
+        // delete user.scoringSessions;
         return {
           ...state,
           seasons,

@@ -1,11 +1,9 @@
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const liveLeaderboardQuery = gql`
   query liveLeaderboardQuery {
-    scoringSessions: allScoringSessions(
-      filter: { status_in: "live" }
-    ) {
+    scoringSessions: allScoringSessions(filter: { status_in: "live" }) {
       scoringPlayers {
         id
         extraStrokes
@@ -50,13 +48,13 @@ const liveLeaderboardQuery = gql`
       }
     }
   }
-`
+`;
 
-export default liveLeaderboardQuery
+export default liveLeaderboardQuery;
 
 export const withLiveLeaderboardQuery = graphql(liveLeaderboardQuery, {
   options: () => ({
     fetchPolicy: 'network-only',
-    pollInterval: 30000
-  })
-})
+    pollInterval: 30000,
+  }),
+});

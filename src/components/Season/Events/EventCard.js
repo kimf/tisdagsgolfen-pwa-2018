@@ -4,8 +4,6 @@ import { shape, string, bool } from 'prop-types';
 import moment from 'moment';
 import 'moment/locale/sv';
 
-import CourseName from './CourseName';
-
 const EventCard = ({ event }) => {
   let gametypeName = '';
   if (event.scoringType === 'modified_points') {
@@ -16,13 +14,8 @@ const EventCard = ({ event }) => {
     gametypeName = 'Slag';
   }
 
-  const isLive =
-    event.scoringSessions.filter(ss => ss.status === 'live').length > 0;
-
-  const className = isLive ? 'live' : event.status;
-
   return (
-    <li className={className}>
+    <li className={event.status}>
       <h3>
         {moment(event.startsAt)
           .format('ddd DD MMM')
@@ -34,8 +27,7 @@ const EventCard = ({ event }) => {
         {' ↝ '}
         {gametypeName}
       </span>
-
-      <CourseName course={event.course} oldCourseName={event.oldCourseName} />
+      <span style={{ fontSize: 16, lineHeight: 1.5 }}>{event.course}</span>
     </li>
   );
 };
@@ -46,11 +38,7 @@ EventCard.propTypes = {
     scoringType: string.isRequired,
     status: string.isRequired,
     teamEvent: bool.isRequired,
-    club: string,
-    course: shape({
-      id: string,
-      name: string,
-    }),
+    course: string,
   }).isRequired,
 };
 

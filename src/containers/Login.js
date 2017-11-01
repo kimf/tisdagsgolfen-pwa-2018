@@ -43,7 +43,7 @@ class Login extends Component {
       })
       .catch(error => {
         // eslint-disable-next-line no-console
-        console.warn(e);
+        console.warn(error);
         this.setState({ error, loggingIn: false });
       });
   };

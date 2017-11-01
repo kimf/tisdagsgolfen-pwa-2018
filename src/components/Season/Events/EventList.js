@@ -4,7 +4,7 @@ import { arrayOf, bool, shape, string } from 'prop-types';
 import EventCard from './EventCard';
 import Loading from '../../Shared/Loading';
 import EmptyState from '../../Shared/EmptyState';
-import withEventsQuery from '../../../graphql/queries/events';
+import withEventsQuery from '../../../graphql/queries/eventsQuery';
 
 const EventList = ({ events, seasonId }) => {
   if (events.loading) {

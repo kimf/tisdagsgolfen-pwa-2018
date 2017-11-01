@@ -7,17 +7,15 @@ const scoringSessionMutation = gql`
     $scorerId: ID!
     $teamEvent: Boolean!
     $scoringType: String!
-    $scoringPlayers: [ScoringSessionscoringPlayersScoringPlayer!]
-    $scoringTeams: [ScoringSessionscoringTeamsScoringTeam!]
-    $startsAt: DateTime!
+    $scoringItems: [ScoringItemInput!]
+    $startsAt: String!
   ) {
     createScoringSession(
       courseId: $courseId
       scorerId: $scorerId
       teamEvent: $teamEvent
       scoringType: $scoringType
-      scoringPlayers: $scoringPlayers
-      scoringTeams: $scoringTeams
+      scoringItems: $scoringItems
       startsAt: $startsAt
       currentHole: 1
     ) {
@@ -29,7 +27,6 @@ const scoringSessionMutation = gql`
       }
       scoringType
       teamEvent
-      status
     }
   }
 `;
@@ -45,8 +42,7 @@ export const withCreateScoringSessionMutation = graphql(
         scorerId,
         teamEvent,
         scoringType,
-        scoringPlayers,
-        scoringTeams = null,
+        scoringItems,
       ) =>
         mutate({
           variables: {
@@ -54,8 +50,7 @@ export const withCreateScoringSessionMutation = graphql(
             scorerId,
             teamEvent,
             scoringType,
-            scoringPlayers,
-            scoringTeams,
+            scoringItems,
             startsAt: new Date(),
           },
         }),

@@ -64,10 +64,6 @@ class Scoring extends Component {
     }
 
     const { scoringSession } = data;
-    const { teamEvent } = scoringSession;
-    const playing = teamEvent
-      ? scoringSession.scoringTeams
-      : scoringSession.scoringPlayers;
     const holesCount = scoringSession.course.holes.length;
 
     // const hole = scoringSession.course.holes.find(
@@ -76,6 +72,7 @@ class Scoring extends Component {
 
     return [
       <ReactSwipe
+        key="scoringSwiper"
         className="carousel"
         swipeOptions={{
           continuous: false,
@@ -84,19 +81,19 @@ class Scoring extends Component {
         }}
       >
         {scoringSession.course.holes.map(hole => (
-          <div className="holeWrapper">
+          <div className="holeWrapper" key={`holeWrapper_${hole.id}`}>
             <HoleView
               key={`hole_view_${hole.id}`}
               hole={hole}
               isActive={hole.number === currentHole}
-              playing={playing}
+              playing={scoringSession.scoringItems}
               holesCount={holesCount}
               scoringSession={scoringSession}
             />
           </div>
         ))}
       </ReactSwipe>,
-      <footer>
+      <footer key="scoringFooter">
         <Link to={`/spela/${scoringSession.id}/ledartavla`}>
           <span role="img" aria-label="scorecard">
             🗒️

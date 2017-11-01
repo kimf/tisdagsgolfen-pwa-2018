@@ -7,18 +7,14 @@ const mainQuery = gql`
     user {
       id
       email
-      admin
       firstName
       lastName
       photo
-      scoringSession(filter: { status_in: "live" }) {
+      admin
+      scoringSessions {
         id
-        status
         scoringType
         teamEvent
-        scorer {
-          id
-        }
         course {
           id
           club
@@ -26,7 +22,7 @@ const mainQuery = gql`
         }
       }
     }
-    seasons: allSeasons(orderBy: name_DESC) {
+    seasons {
       id
       name
       closed

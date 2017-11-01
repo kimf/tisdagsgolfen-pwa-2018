@@ -4,7 +4,7 @@ import { string, number, shape, func } from 'prop-types';
 const CourseRow = ({ course, selectCourse }) => (
   <li onClick={() => selectCourse(course)}>
     {course.name}, PAR {course.par} -
-    {course.holes.count} HÅL,
+    {course.holeCount} HÅL,
     {course.club}
   </li>
 );
@@ -15,9 +15,7 @@ CourseRow.propTypes = {
     club: string.isRequired,
     name: string.isRequired,
     par: number.isRequired,
-    holes: shape({
-      count: number.isRequired,
-    }).isRequired,
+    holeCount: number.isRequired,
   }).isRequired,
   selectCourse: func.isRequired,
 };

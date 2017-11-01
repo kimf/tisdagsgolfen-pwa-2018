@@ -61,7 +61,7 @@ class SetupIndividual extends Component {
       } = this.props;
       const scoringPlayers = this.state.playing.map(p => ({
         extraStrokes: parseInt(p.strokes, 10),
-        userId: p.id,
+        userIds: [p.id],
       }));
       const scoringType = isStrokes ? 'strokes' : 'points';
       const res = await createScoringSession(

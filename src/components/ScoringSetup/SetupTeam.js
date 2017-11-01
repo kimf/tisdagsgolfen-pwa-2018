@@ -105,7 +105,7 @@ class SetupTeamEvent extends Component {
 
       const scoringTeams = this.state.playing.map(team => ({
         extraStrokes: parseInt(team.strokes, 10),
-        usersIds: team.players.map(p => p.id),
+        userIds: team.players.map(p => p.id),
       }));
       const scoringType = isStrokes ? 'strokes' : 'points';
       const res = await createScoringSession(
@@ -113,7 +113,6 @@ class SetupTeamEvent extends Component {
         currentUser.id,
         true,
         scoringType,
-        null,
         scoringTeams,
       );
       history.push(`/spela/${res.data.createScoringSession.id}`);
@@ -130,7 +129,7 @@ class SetupTeamEvent extends Component {
 
     return (
       <div>
-        <a onClick={this.onAddTeam}>+ LÄGG TILL LAG</a>
+        <button onClick={this.onAddTeam}>+ LÄGG TILL LAG</button>
         {playing.map(team => {
           const props = {
             addedIds,

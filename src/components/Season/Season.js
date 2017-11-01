@@ -7,8 +7,8 @@ import Leaderboard from './Leaderboard';
 import Header from '../Shared/Header';
 
 const Season = ({ season, ...rest }) => [
-  <Header showPhoto />,
-  <nav className="subnav">
+  <Header key={`seasonHeader_${season.id}`} showPhoto />,
+  <nav key={`seasonSubNav_${season.id}`} className="subnav">
     <NavLink activeClassName="selected" to={`/${season.name}`} exact>
       Ledartavla
     </NavLink>
@@ -16,7 +16,7 @@ const Season = ({ season, ...rest }) => [
       Rundor
     </NavLink>
   </nav>,
-  <div className="container">
+  <div key={`seasonContainer_${season.id}`} className="container">
     <Switch>
       <Route
         exact

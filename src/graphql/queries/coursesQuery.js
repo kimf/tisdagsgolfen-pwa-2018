@@ -1,25 +1,19 @@
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const coursesQuery = gql`
-   query coursesQuery {
-    courses: allCourses (
-      orderBy: club_ASC
-    ) {
+  query courses {
+    courses {
       id
       club
       name
       par
-      holes: _holesMeta {
-        count
-      }
-      events: _eventsMeta {
-        count
-      }
+      holeCount
+      eventCount
     }
-   }
-`
+  }
+`;
 
-export default coursesQuery
+export default coursesQuery;
 
-export const withCoursesQuery = graphql(coursesQuery)
+export const withCoursesQuery = graphql(coursesQuery);

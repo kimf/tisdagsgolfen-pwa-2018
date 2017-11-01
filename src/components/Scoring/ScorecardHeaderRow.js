@@ -1,14 +1,19 @@
 import React from 'react';
 import { bool, string } from 'prop-types';
 
-const ScorecardHeaderRow = ({ teamEvent, scoring, scoringType }) => {
+const ScorecardHeaderRow = ({
+  leaderboard,
+  teamEvent,
+  scoring,
+  scoringType,
+}) => {
   const puttsHeader = teamEvent ? null : <th>PUTT</th>;
-  const beersHeader = !scoring || teamEvent ? null : <th>ÖL</th>;
+  const beersHeader = teamEvent ? null : <th>ÖL</th>;
   const strokes = scoringType === 'strokes';
   return (
     <thead>
       <tr className="subheader">
-        {scoring ? <th>POS</th> : null}
+        {leaderboard ? <th>POS</th> : null}
         <th>SPELARE</th>
         {beersHeader}
         <th>{strokes ? 'BRUTTO' : 'SLAG'}</th>
@@ -20,9 +25,14 @@ const ScorecardHeaderRow = ({ teamEvent, scoring, scoringType }) => {
 };
 
 ScorecardHeaderRow.propTypes = {
+  leaderboard: bool,
   teamEvent: bool.isRequired,
   scoring: bool.isRequired,
   scoringType: string.isRequired,
+};
+
+ScorecardHeaderRow.defaultProps = {
+  leaderboard: false,
 };
 
 export default ScorecardHeaderRow;

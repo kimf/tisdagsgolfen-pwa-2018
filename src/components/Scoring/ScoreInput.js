@@ -20,10 +20,10 @@ const optionGroups = {
 
 class ScoreInput extends Component {
   static propTypes = {
-    holeId: string.isRequired,
+    holeNr: number.isRequired,
+    par: number.isRequired,
     playerId: string.isRequired,
     scoringSessionId: string.isRequired,
-    par: number.isRequired,
     teamEvent: bool.isRequired,
     scoreItem: oneOfType([
       bool,
@@ -52,30 +52,30 @@ class ScoreInput extends Component {
 
   onCloseScoreForm = () => {
     const {
-      holeId,
       par,
       teamEvent,
       playerId,
       scoringSessionId,
       createLiveScore,
       updateLiveScore,
+      holeNr,
     } = this.props;
     const { extraStrokes } = this.props.scoreItem;
     const { beers, strokes, putts } = this.state.valueGroups;
     const newScoreItem = {
       ...this.props.scoreItem,
+      extraStrokes,
+      hole: holeNr,
       beers,
       strokes,
       putts,
+      par,
     };
 
-    const playingId = teamEvent
-      ? { scoringTeamId: playerId }
-      : { scoringPlayerId: playerId };
     const ids = {
-      holeId,
       scoringSessionId,
-      ...playingId,
+      userId: teamEvent ? null : playerId,
+      teamIndex: teamEvent ? playerId : null,
     };
 
     if (putts > strokes) {
@@ -85,7 +85,6 @@ class ScoreInput extends Component {
       const strokeSum = strokes - extraStrokes;
       const testSum = strokeSum - par;
       newScoreItem.points = parseInt(pointsArray[testSum], 10);
-      newScoreItem.inFlight = true;
 
       const save = async () => {
         try {

@@ -1,11 +1,8 @@
 import React from 'react';
-import { bool, number, shape } from 'prop-types';
+import { number, shape } from 'prop-types';
 
-const UserColumn = ({ teamEvent, item, scoreItem }) => {
-  const name = teamEvent
-    ? item.users.map(p => p.firstName).join(', ')
-    : `${item.user.firstName} ${item.user.lastName.substr(0, 1)}`;
-
+const UserColumn = ({ item, scoreItem }) => {
+  const name = item.users.map(p => p.firstName).join(', ');
   return (
     <td>
       <strong>{name}</strong>
@@ -16,7 +13,6 @@ const UserColumn = ({ teamEvent, item, scoreItem }) => {
 };
 
 UserColumn.propTypes = {
-  teamEvent: bool.isRequired,
   item: shape().isRequired,
   scoreItem: shape({
     extraStrokes: number.isRequired,

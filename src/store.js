@@ -5,9 +5,8 @@ import thunk from 'redux-thunk';
 import app from './reducers/app';
 
 const configureStore = (client, onComplete) => {
-  // eslint-disable-next-line no-underscore-dangle
   const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-underscore-dangle
   const middleware = [thunk, client.middleware()];
 
   const reducers = combineReducers({ app, apollo: client.reducer() });

@@ -2,7 +2,7 @@ import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { getCache } from './utils';
 
 const networkInterface = createNetworkInterface({
-  uri: 'http://localhost:60000/simple/v1/cj94a1ew6002l0198pmwbruv5',
+  uri: 'http://localhost:3000/api/graphql',
   batchInterval: 10,
   queryDeduplication: true,
 });
@@ -19,7 +19,7 @@ networkInterface.use([
         if (currentUser === null) {
           next();
         } else {
-          req.options.headers.authorization = `Bearer ${currentUser.token}`;
+          req.options.headers.authorization = `Token token=${currentUser.token}`;
           next();
         }
       });

@@ -26,8 +26,8 @@ class NewSeason extends Component {
   render() {
     const { name } = this.state;
     return [
-      <Header title="Skapa ny säsong" goBack />,
-      <div className="container form">
+      <Header key="header" title="Skapa ny säsong" goBack />,
+      <div key="container" className="container form">
         <div className="inputWrapper">
           <label htmlFor="name">
             Säsongens namn

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { arrayOf, bool, string, shape } from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'react-apollo';
 
@@ -17,7 +16,6 @@ import { rankBySorting, massageIntoLeaderboard } from '../../utils';
 class ScoringLeaderboard extends Component {
   static propTypes = {
     currentUserId: string.isRequired,
-    scoringSessionId: string.isRequired,
     scoringType: string.isRequired,
     teamEvent: bool.isRequired,
     data: shape({
@@ -40,13 +38,7 @@ class ScoringLeaderboard extends Component {
   };
 
   render() {
-    const {
-      data,
-      currentUserId,
-      scoringSessionId,
-      scoringType,
-      teamEvent,
-    } = this.props;
+    const { data, currentUserId, scoringType, teamEvent } = this.props;
     const { sorting } = this.state;
 
     let sortedPlayers = [];
@@ -57,8 +49,8 @@ class ScoringLeaderboard extends Component {
 
     // TODO: Show tabs for teamEvents when you figured out how to solve the beers part
     return [
-      <Header title="Ledartavla" goBack />,
-      <div className="container">
+      <Header key="ScoringLeaderboardHeader" title="Ledartavla" goBack />,
+      <div key="ScoringLeaderboardContainer" className="container">
         {!teamEvent && (
           <Tabs
             teamEvent={teamEvent}
@@ -70,6 +62,7 @@ class ScoringLeaderboard extends Component {
         <table>
           {sorting === 'totalPoints' && (
             <ScorecardHeaderRow
+              leaderboard
               scoring={false}
               scoringType={scoringType}
               teamEvent={teamEvent}

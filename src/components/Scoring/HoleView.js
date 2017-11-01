@@ -30,12 +30,12 @@ class HoleView extends Component {
 
   render() {
     const { hole, playing, holesCount, scoringSession } = this.props;
-    const { teamEvent, scoringType } = scoringSession;
+    const { teamEvent, scoringType, liveScores } = scoringSession;
     const { scoringId } = this.state;
 
     return [
-      <HoleHeader {...hole} />,
-      <div className="container">
+      <HoleHeader key={`HoleViewHoleHeader_${hole.id}`} {...hole} />,
+      <div className="container" key={`HoleViewContainer_${hole.id}`}>
         <table className="holeTable">
           <ScorecardHeaderRow
             teamEvent={teamEvent}
@@ -43,10 +43,11 @@ class HoleView extends Component {
             scoring={scoringId !== null}
           />
           <tbody>
-            {playing.map(item => {
-              const attrWithId = teamEvent ? 'scoringTeam' : 'scoringPlayer';
-              const liveScore = hole.liveScores.find(
-                ls => ls[attrWithId].id === item.id,
+            {playing.map((item, index) => {
+              const userId = teamEvent ? index : item.users[0].id;
+
+              const liveScore = liveScores.find(
+                ls => ls.user.id === userId && ls.hole === hole.number,
               );
               const scoreItem = liveScore || {
                 strokes: hole.par,
@@ -62,14 +63,13 @@ class HoleView extends Component {
 
               return (
                 <tr
-                  key={`hole_view_${hole.id}_scoring_${item.id}`}
+                  key={`hole_view_${hole.id}_scoring_${userId}`}
                   onClick={() =>
-                    scoringId ? null : this.toggleScoring(item.id)}
+                    scoringId ? null : this.toggleScoring(userId)}
                 >
-                  {scoringId && scoringId !== item.id ? null : (
+                  {scoringId && scoringId !== userId ? null : (
                     <UserColumn
-                      key={`scoreRow_${item.id}`}
-                      teamEvent={teamEvent}
+                      key={`scoreRow_${userId}`}
                       item={item}
                       scoreItem={scoreItem}
                     />
@@ -82,17 +82,17 @@ class HoleView extends Component {
                         scoringType,
                         teamEvent,
                         scoreItem,
-                        scoringId: item.id,
+                        scoringId: userId,
                       }}
                     />
                   )}
 
-                  {scoringId !== item.id ? null : (
+                  {scoringId !== userId ? null : (
                     <ScoreInput
                       key={`scoreInput${scoreItem.id}`}
                       scoreItem={scoreItem}
-                      playerId={item.id}
-                      holeId={hole.id}
+                      playerId={userId}
+                      holeNr={hole.number}
                       par={hole.par}
                       teamEvent={teamEvent}
                       onClose={this.toggleScoring}

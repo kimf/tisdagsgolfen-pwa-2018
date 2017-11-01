@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { arrayOf, bool, shape, func } from 'prop-types';
+import { arrayOf, bool, shape, func, number, string } from 'prop-types';
 // import geolib from 'geolib'
 
 import CourseRow from './CourseRow';
@@ -9,8 +9,8 @@ import EmptyState from '../Shared/EmptyState';
 import { cacheable } from '../../utils';
 import { withCoursesQuery } from '../../graphql/queries/coursesQuery';
 
-const fixString = string =>
-  string
+const fixString = stringToFix =>
+  stringToFix
     .trim()
     .replace(/-/g, '')
     .replace(/ /g, '')
@@ -33,8 +33,8 @@ const filterCourses = cacheable((courses, query) =>
 
 const getPreviouslyPlayedCourses = cacheable(courses =>
   courses
-    .filter(c => c.events.count > 0)
-    .sort((a, b) => a.events.count - b.events.count),
+    .filter(c => c.eventCount > 0)
+    .sort((a, b) => a.eventCount - b.eventCount),
 );
 
 class CoursePicker extends Component {
@@ -42,7 +42,14 @@ class CoursePicker extends Component {
     selectCourse: func.isRequired,
     data: shape({
       loading: bool,
-      courses: arrayOf(shape()),
+      courses: arrayOf(
+        shape({
+          holeCount: number.isRequired,
+          eventCount: number.isRequired,
+          club: string.isRequired,
+          name: string.isRequired,
+        }),
+      ),
     }),
   };
 
@@ -53,7 +60,7 @@ class CoursePicker extends Component {
     },
   };
 
-  state = { query: '', location: null };
+  state = { query: '' /* , location: null */ };
 
   // componentWillMount() {
   //   const options = {

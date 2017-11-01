@@ -59,11 +59,13 @@ class ScoreInput extends Component {
       createLiveScore,
       updateLiveScore,
       holeNr,
+      scoreItem,
     } = this.props;
-    const { extraStrokes } = this.props.scoreItem;
+
+    const { extraStrokes } = scoreItem;
     const { beers, strokes, putts } = this.state.valueGroups;
     const newScoreItem = {
-      ...this.props.scoreItem,
+      points: scoreItem.points,
       extraStrokes,
       hole: holeNr,
       beers,
@@ -88,8 +90,8 @@ class ScoreInput extends Component {
 
       const save = async () => {
         try {
-          if (newScoreItem.id) {
-            await updateLiveScore(newScoreItem);
+          if (scoreItem.id) {
+            await updateLiveScore(scoreItem.id, newScoreItem);
           } else {
             await createLiveScore(ids, newScoreItem);
           }

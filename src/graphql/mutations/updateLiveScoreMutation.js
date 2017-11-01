@@ -1,23 +1,9 @@
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const updateLiveScoreMutation = gql`
-  mutation updateLiveScore(
-    $id: ID!,
-    $extraStrokes: Int!,
-    $strokes:Int!,
-    $putts:Int!,
-    $points:Int!,
-    $beers:Int!
-  ) {
-    updateLiveScore(
-      id:$id,
-      extraStrokes:$extraStrokes,
-      strokes:$strokes,
-      putts:$putts,
-      points:$points,
-      beers:$beers
-    ) {
+  mutation updateLiveScore($id: ID!, $data: LiveScoreDataInput!) {
+    updateLiveScore(id: $id, data: $data) {
       id
       extraStrokes
       strokes
@@ -26,12 +12,12 @@ const updateLiveScoreMutation = gql`
       beers
     }
   }
-`
+`;
 
-export default updateLiveScoreMutation
+export default updateLiveScoreMutation;
 
 export const withUpdateLiveScoreMutation = graphql(updateLiveScoreMutation, {
   props: ({ mutate }) => ({
-    updateLiveScore: scoreItem => mutate({ variables: { ...scoreItem } })
-  })
-})
+    updateLiveScore: (id, data) => mutate({ variables: { id, data } }),
+  }),
+});

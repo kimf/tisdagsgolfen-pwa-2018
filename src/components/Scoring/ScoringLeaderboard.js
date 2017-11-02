@@ -11,7 +11,6 @@ import Tabs from '../Shared/Tabs';
 // import EventHeader from 'Events/EventHeader'
 
 import { withLiveLeaderboardQuery } from '../../graphql/queries/liveLeaderboardQuery';
-import { rankBySorting, massageIntoLeaderboard } from '../../utils';
 
 class ScoringLeaderboard extends Component {
   static propTypes = {
@@ -20,7 +19,7 @@ class ScoringLeaderboard extends Component {
     teamEvent: bool.isRequired,
     data: shape({
       loading: bool,
-      scoringSessions: arrayOf(shape()), // TODO: How do we want the data to look?
+      liveLeaderboard: arrayOf(shape()), // TODO: How do we want the data to look?
     }),
   };
 
@@ -42,9 +41,8 @@ class ScoringLeaderboard extends Component {
     const { sorting } = this.state;
 
     let sortedPlayers = [];
-    if (data.scoringSessions && data.scoringSessions.length > 0) {
-      const players = massageIntoLeaderboard(data.scoringSessions, teamEvent);
-      sortedPlayers = rankBySorting(players, sorting, teamEvent, scoringType);
+    if (data.liveLeaderboard && data.liveLeaderboard.length > 0) {
+      sortedPlayers = data.liveLeaderboard;
     }
 
     // TODO: Show tabs for teamEvents when you figured out how to solve the beers part
@@ -60,14 +58,12 @@ class ScoringLeaderboard extends Component {
           />
         )}
         <table>
-          {sorting === 'totalPoints' && (
-            <ScorecardHeaderRow
-              leaderboard
-              scoring={false}
-              scoringType={scoringType}
-              teamEvent={teamEvent}
-            />
-          )}
+          <ScorecardHeaderRow
+            leaderboard
+            scoring={false}
+            scoringType={scoringType}
+            teamEvent={teamEvent}
+          />
           <tbody>
             {sortedPlayers.map(item => (
               <ScoringLeaderboardCard

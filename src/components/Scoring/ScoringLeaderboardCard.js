@@ -3,7 +3,7 @@ import { arrayOf, bool, shape, string, number } from 'prop-types';
 
 const getItemName = (teamEvent, player) => {
   if (!teamEvent) {
-    return `${player.firstName} ${player.lastName.substr(0, 1)}`;
+    return player.name;
   }
   return player.users.map(u => u.firstName).join(', ');
 };

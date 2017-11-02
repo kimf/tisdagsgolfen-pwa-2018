@@ -7,7 +7,7 @@ const ScorecardHeaderRow = ({
   scoring,
   scoringType,
 }) => {
-  const puttsHeader = teamEvent ? null : <th>PUTT</th>;
+  const puttsHeader = leaderboard || teamEvent ? null : <th>PUTT</th>;
   const beersHeader = teamEvent ? null : <th>ÖL</th>;
   const strokes = scoringType === 'strokes';
   return (
@@ -19,6 +19,7 @@ const ScorecardHeaderRow = ({
         <th>{strokes ? 'BRUTTO' : 'SLAG'}</th>
         {puttsHeader}
         {scoring ? null : <th>{strokes ? 'NETTO' : 'POÄNG'}</th>}
+        {leaderboard ? <th>KR</th> : null}
       </tr>
     </thead>
   );

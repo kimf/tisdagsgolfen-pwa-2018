@@ -1,5 +1,5 @@
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 // const liveScoreStrings = liveScoreIds => liveScoreIds.map(lsId =>
 //   `liveScore_${lsId}: deleteLiveScore(id: ${lsId})`
@@ -13,23 +13,21 @@ import gql from 'graphql-tag'
 //   `scoringTeam_${stId}: deleteScoringTeam(id: ${stId})`
 // ).join()
 
-
 const cancelRoundMutation = gql`
-  mutation cancelRoundMutation(
-    $scoringSessionId: ID!
-  ) {
+  mutation cancelRoundMutation($scoringSessionId: ID!) {
     deleteScoringSession(id: $scoringSessionId) {
       id
     }
   }
-`
+`;
 
-export default cancelRoundMutation
+export default cancelRoundMutation;
 
 export const withCancelRoundMutation = graphql(cancelRoundMutation, {
   props: ({ mutate }) => ({
-    cancelRound: scoringSessionId => mutate({
-      variables: { scoringSessionId }
-    })
-  })
-})
+    cancelRound: scoringSessionId =>
+      mutate({
+        variables: { scoringSessionId },
+      }),
+  }),
+});

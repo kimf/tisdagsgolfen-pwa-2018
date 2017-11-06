@@ -13,7 +13,7 @@ const PhotoLink = user => (
   </Link>
 );
 
-const AdminNav = () => <Link to="/seasons/new">+ NY SÄSONG</Link>;
+const AdminNav = () => null;
 
 class Header extends Component {
   static propTypes = {

@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 
 import Profile from '../components/Profile';
 import Season from '../components/Season/Season';
-import NewSeason from '../components/Season/NewSeason';
 import EmptyState from '../components/Shared/EmptyState';
 import NewRound from '../components/ScoringSetup/NewRound';
 import Scoring from '../components/Scoring/Scoring';
@@ -24,7 +23,6 @@ const Home = ({ user, seasons }) => (
     <div className="app">
       <Switch>
         <Route exact path="/profil" render={() => <Profile user={user} />} />
-        <Route exact path="/seasons/new" component={NewSeason} />
         <Route exact path="/spela" component={NewRound} />
         <Route exact path="/spela/:scoringSessionId" component={Scoring} />
         <Route

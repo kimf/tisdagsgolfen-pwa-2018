@@ -443,3 +443,20 @@ button.block {
 .carousel {
   height: 100%;
 }
+
+span.up,
+span.down {
+  float: left;
+  width: 100%;
+}
+span.up {
+  color: green;
+}
+
+span.down {
+  color: red;
+}
+
+td strong {
+  font-size: 1.1em;
+}

@@ -1,11 +1,12 @@
 import React from 'react';
-import { arrayOf, bool, shape } from 'prop-types';
+import { arrayOf, bool, shape, string } from 'prop-types';
 
 import Loading from '../Shared/Loading';
 import EmptyState from '../Shared/EmptyState';
 import withSeasonLeaderboardQuery from '../../graphql/queries/seasonLeaderboardQuery';
+import UpOrDown from '../Shared/UpOrDown';
 
-const Leaderboard = ({ seasonLeaderboard }) => {
+const Leaderboard = ({ seasonLeaderboard, seasonId }) => {
   if (seasonLeaderboard.loading) {
     return <Loading text="Laddar ledartavla..." />;
   }
@@ -15,11 +16,10 @@ const Leaderboard = ({ seasonLeaderboard }) => {
   }
 
   return (
-    <table>
+    <table key={`leaderboard_${seasonId}`} cellSpacing="0" cellPadding="0">
       <thead>
         <tr>
           <th>Pos</th>
-          <th>↑↓</th>
           <th>Spelare</th>
           <th>
             <span role="img" aria-label="Öl">
@@ -40,16 +40,23 @@ const Leaderboard = ({ seasonLeaderboard }) => {
       <tbody>
         {seasonLeaderboard.seasonLeaderboard
           .filter(u => u.eventCount > 0)
+          .sort((a, b) => a.position - b.position)
           .map(user => (
-            <tr key={user.id}>
-              <td>{user.position}</td>
-              <td>{user.prevPosition - user.position}</td>
+            <tr key={`season_${seasonId}_${user.id}`}>
+              <td>
+                <strong>{user.position}</strong>
+                <UpOrDown prev={user.prevPosition} current={user.position} />
+              </td>
               <td>{user.name}</td>
               <td>{user.beers}</td>
               <td>{user.eventCount}</td>
               <td>{user.average}</td>
-              <td>{user.totalPoints}</td>
-              <td>{user.topPoints.join(', ')}</td>
+              <td>
+                <strong>{user.totalPoints} p</strong>
+              </td>
+              <td>
+                <small>{user.topPoints.join(', ')}</small>
+              </td>
               <td>{user.totalKr} kr</td>
             </tr>
           ))}
@@ -63,6 +70,7 @@ Leaderboard.propTypes = {
     loading: bool.isRequired,
     seasonLeaderboard: arrayOf(shape()),
   }).isRequired,
+  seasonId: string.isRequired,
 };
 
 export default withSeasonLeaderboardQuery(Leaderboard);

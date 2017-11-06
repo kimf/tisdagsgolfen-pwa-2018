@@ -30,5 +30,14 @@ networkInterface.use([
 
 export default new ApolloClient({
   networkInterface,
-  dataIdFromObject: o => o.id,
+  dataIdFromObject: result => {
+    // eslint-disable-next-line no-underscore-dangle
+    if (result.id && result.__typename) {
+      // eslint-disable-next-line no-underscore-dangle
+      return result.__typename + result.id;
+    }
+
+    // Make sure to return null if this object doesn't have an ID
+    return null;
+  },
 });

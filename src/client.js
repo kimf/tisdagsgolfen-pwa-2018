@@ -1,43 +1,42 @@
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
+import ApolloClient from 'apollo-client';
+import { setContext } from 'apollo-link-context';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
 import { getCache } from './utils';
 
-const networkInterface = createNetworkInterface({
+const httpLink = createHttpLink({
   uri: 'http://localhost:3000/api/graphql',
-  batchInterval: 10,
-  queryDeduplication: true,
 });
 
-/* eslint-disable no-param-reassign */
-networkInterface.use([
-  {
-    applyMiddleware(req, next) {
-      if (!req.options.headers) {
-        req.options.headers = {};
-      }
+const dataIdFromObject = result => {
+  // eslint-disable-next-line no-underscore-dangle
+  if (result.id && result.__typename) {
+    // eslint-disable-next-line no-underscore-dangle
+    return result.__typename + result.id;
+  }
+  // Make sure to return null if this object doesn't have an ID
+  return null;
+};
 
-      getCache('currentUser').then(currentUser => {
-        if (currentUser === null) {
-          next();
-        } else {
-          req.options.headers.authorization = `Token token=${currentUser.token}`;
-          next();
-        }
-      });
-    },
-  },
-]);
-/* eslint-enable no-param-reassign */
+const cache = new InMemoryCache({
+  dataIdFromObject,
+  addTypename: true,
+});
+
+const authLink = setContext((_, { headers }) => {
+  getCache('currentUser').then(currentUser => ({
+    ...headers,
+    authorization:
+      currentUser && currentUser.token
+        ? `Token token=${currentUser.token}`
+        : null,
+  }));
+});
+
+const link = authLink.concat(httpLink);
 
 export default new ApolloClient({
-  networkInterface,
-  dataIdFromObject: result => {
-    // eslint-disable-next-line no-underscore-dangle
-    if (result.id && result.__typename) {
-      // eslint-disable-next-line no-underscore-dangle
-      return result.__typename + result.id;
-    }
-
-    // Make sure to return null if this object doesn't have an ID
-    return null;
-  },
+  link,
+  cache,
 });

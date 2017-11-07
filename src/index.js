@@ -1,33 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { ApolloProvider } from 'react-apollo';
-
-import apolloClient from './client';
-import store from './store';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import App from './App';
-
 import './index.css';
 
-class Root extends Component {
-  state = { hasLoaded: false };
-  store = store(apolloClient, () => {
-    this.setState({ hasLoaded: true });
-  });
+import apolloClient from './client';
+import configureStore from './store';
 
-  render() {
-    const { hasLoaded } = this.state;
+const { store, persistor } = configureStore();
 
-    if (!hasLoaded) {
-      return null;
-    }
-
-    return (
-      <ApolloProvider client={apolloClient} store={this.store}>
+const Root = () => (
+  <PersistGate persistor={persistor}>
+    <ApolloProvider client={apolloClient}>
+      <Provider store={store}>
         <App />
-      </ApolloProvider>
-    );
-  }
-}
+      </Provider>
+    </ApolloProvider>
+  </PersistGate>
+);
 
 ReactDOM.render(<Root />, document.getElementById('root'));

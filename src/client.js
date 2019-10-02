@@ -6,7 +6,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { getCache } from './utils';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3000/api/graphql',
+  uri: 'http://localhost:3001/api/graphql',
 });
 
 const dataIdFromObject = result => {

@@ -66,7 +66,7 @@ class SetupIndividual extends Component {
       const scoringType = isStrokes ? 'strokes' : 'points';
       const res = await createScoringSession(
         courseId,
-        currentUser.id,
+        13566,
         false,
         scoringType,
         scoringPlayers,
